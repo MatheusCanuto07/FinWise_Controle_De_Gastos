@@ -1,13 +1,18 @@
 import type { PageServerLoad } from './$types';
 import {asc} from 'drizzle-orm';
 import { db } from '../lib/db';
-import { testSvelte } from '$lib/schema';
+import { productsTable, testSvelte } from '$lib/schema';
 
 export const load = (async () => {
   
-  const dados = await db.query.testSvelte.findMany();
+  const products = await db.query.productsTable.findMany();
+  const teste = await db.select({
+    title : productsTable.title
+  })
+  .from(productsTable)
 
   return {
-    dados
+    products,
+    teste
   };
 }) satisfies PageServerLoad;

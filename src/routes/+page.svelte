@@ -2,6 +2,8 @@
 	import Card from '$lib/components/Card.svelte';
 	import { draggable, droppable, type DragDropState } from '@thisux/sveltednd';
 
+  import type { PageData } from './$types';
+  let { data }: { data: PageData } = $props();
 	interface Item {
 		id: string;
 		name: string;
@@ -30,6 +32,9 @@
 			container1 = [...container1, draggedItem];
 		}
 	}
+
+  console.log(data.products);
+  console.log(data.teste);
 </script>
 
 <div class="flex flex-wrap">
@@ -46,14 +51,22 @@
 	</div>
 
 	<div 
-  class="w-8/12 bg-slate-500 flex gap-5"
+  class="w-8/12 bg-slate-500 flex gap-5 h-svh py-5"
   use:droppable={{ container: 'container2', callbacks: { onDrop: handleDrop } }}>
-		{#each container2 as item}
-      <div 
-      class="first:ml-10"
-      use:draggable={{ container: 'container2', dragData: item }}>
-        <Card title={item.id} description={item.name}/> 
+  <div class="mockup-phone h-full w-1/3">
+    <div class="camera"></div>
+    <div class="display pt-8">
+      <h1>Destaques</h1>
+      <div class="flex gap-4">
+        {#each container2 as item}
+          <div 
+          class="first:ml-4"
+          use:draggable={{ container: 'container2', dragData: item }}>
+            <Card title={item.id} description={item.name}/> 
+          </div>
+        {/each}
       </div>
-		{/each}
+    </div>
+  </div>
 	</div>
 </div>
