@@ -4,7 +4,7 @@
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
-      <li><a>Link</a></li>
+      <li><a href="/admin">Menu admin</a></li>
       <li>
         <details>
           <summary>Parent</summary>
