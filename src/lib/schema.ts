@@ -44,6 +44,18 @@ export const productCategoriesTable = sqliteTable(
   })
 );
 
+export const transactionsTable = sqliteTable("transactions", {
+  id: int("id").primaryKey(),
+  banco: text("description").notNull(),
+  tipo: text("tipo").notNull(),
+  data: text("data").notNull(),
+  valor: integer("valor").notNull(),
+  categoria: text("categoria").notNull(),
+  recorrencia: integer("recorrencia").notNull(),
+  dataRecorrencia: integer("dataRecorrencia").notNull(),
+  observacao: text("observacao").notNull(),
+});
+
 // Tabela para Clientes (Futura, propósitos adicionais)
 // export const clientesTable = sqliteTable("clientes", {
 //   id: int("id").primaryKey(),
@@ -56,4 +68,4 @@ export const productCategoriesTable = sqliteTable(
 
 // Inferência automática de tipo para produtos
 
-export type Product = typeof productsTable.$inferSelect;
+export type transactionsTable = typeof transactionsTable.$inferSelect;
