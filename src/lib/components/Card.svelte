@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { draggable } from "@thisux/sveltednd";
-  import type {Product} from "$lib/schema";
+  import type {Product} from "$lib/schema/transacoes";
 
   let {title, description, titleServe, price, img, id} : Product = $props();  
 </script>

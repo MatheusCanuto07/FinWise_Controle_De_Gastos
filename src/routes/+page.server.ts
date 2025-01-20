@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
 import {asc} from 'drizzle-orm';
-import { db } from '../lib/db';
-import { productsTable, testSvelte } from '$lib/schema';
+import { db } from '../lib/db/db';
+import { productsTable, testSvelte } from '$lib/db/schema';
 
 export const load = (async () => {
   

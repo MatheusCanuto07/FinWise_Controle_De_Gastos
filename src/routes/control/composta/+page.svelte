@@ -1,9 +1,8 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-
+  import type { PageData } from './$types';
   let selectedTipoMovimentacao = $state();
 
-	let { data }: { data: PageData } = $props();
+  let { data }: { data: PageData } = $props();
 </script>
 
 <form action="">

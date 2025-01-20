@@ -22,6 +22,13 @@
       "when": 1735687315902,
       "tag": "0002_sweet_radioactive_man",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1737226045063,
+      "tag": "0003_daily_elektra",
+      "breakpoints": true
     }
   ]
 }
