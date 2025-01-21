@@ -1,14 +1,15 @@
-import * as s from './schema'
 import { desc, eq, sql } from 'drizzle-orm'
+import { transactionsTable } from './schema'
 import { db } from './db'
 
+type transactionsModel = typeof transactionsTable.$inferInsert;
+
 export const queries = () => ({
-  teste : async () => {
-    const result = await db
-    .select()
+  listarTransacoes : async () => {
+    return db.select().from(transactionsTable);
+  },
+
+  enviarTransacaoSimples : async (transacao : transactionsModel) => {
+    return db.insert(transactionsTable).values(transacao)
   }
-  // const teste = await db.select({
-  //     title : productsTable.title
-  //   })
-  //   .from(productsTable)
 })
