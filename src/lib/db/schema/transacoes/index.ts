@@ -14,16 +14,4 @@ export const transactionsTable = sqliteTable("transactionsT", {
   descricao: text("descricao"),
 });
 
-// Tabela para Clientes (Futura, propósitos adicionais)
-// export const clientesTable = sqliteTable("clientes", {
-//   id: int("id").primaryKey(),
-//   name: text("name").notNull(),
-//   email: text("email").notNull(),
-//   password: text("password").notNull(),
-//   createdAt: text("created_at"),
-//   updatedAt: text("updated_at"),
-// });
-
-// Inferência automática de tipo para produtos
-
 export type transactionsTable = typeof transactionsTable.$inferInsert;
