@@ -12,6 +12,17 @@ export const transactionsTable = sqliteTable("transactionsT", {
   recorrencia: integer("recorrencia"),
   dataRecorrencia: integer("dataRecorrencia"),
   descricao: text("descricao"),
+  idUsuario: integer("idUsuario").notNull(),
+});
+
+// Fazer uma tabela de usuário com o saldo atual
+export const usuarioTable = sqliteTable("Usuario", {
+  id: int("id").primaryKey(),
+  nome: text("nome").notNull(),
+  email: text("email").notNull(),
+  password: text("password").notNull(),
+  saldo: integer("saldo").notNull(),
 });
 
 export type transactionsTable = typeof transactionsTable.$inferInsert;
+export type usuarioTable = typeof usuarioTable.$inferInsert;

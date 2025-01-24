@@ -4,6 +4,8 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
-{#each data.todasTransacoes as t}
+aaa
+
+<!-- {#each data.todasTransacoes as t}
   
-{/each}
+{/each} -->
