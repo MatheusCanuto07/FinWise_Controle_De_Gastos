@@ -1,11 +1,10 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+  import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
+  let saldoAtual = data.saldoAtual[0];
 </script>
 
-aaa
-
-<!-- {#each data.todasTransacoes as t}
-  
-{/each} -->
+<pre>
+  {JSON.stringify(saldoAtual, null, 2)}
+</pre>

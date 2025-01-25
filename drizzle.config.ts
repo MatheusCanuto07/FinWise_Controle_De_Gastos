@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 export default {
   schema: "./src/lib/db/schema",
-  out: "./drizzle",
+  out: "./drizzle/",
   driver: "turso",
   dbCredentials: {
     url: process.env.TURSO_DATABASE_URL!,

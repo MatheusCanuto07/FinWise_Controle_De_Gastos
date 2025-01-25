@@ -6,7 +6,7 @@ type transactionsModel = typeof transactionsTable.$inferInsert;
 type transactionsSelect = typeof transactionsTable.$inferSelect;
 
 type usuarioModel = typeof usuarioTable.$inferSelect;
-type usuarioSelect = typeof usuarioTable.$inferInsert;;
+type usuarioSelect = typeof usuarioTable.$inferInsert;
 
 export const queries = () => ({
 	listarTransacoes: async () => {
@@ -38,7 +38,7 @@ export const queries = () => ({
 			);
 	},
 
-	enviarTranacao: async (transacao: transactionsModel, usuario : usuarioModel) => {
+	enviarTransacao: async (transacao: transactionsModel, usuario : usuarioModel) => {
 		return db.transaction(async (t) => {
 			t.insert(transactionsTable).values(transacao);
 			t
@@ -46,5 +46,31 @@ export const queries = () => ({
       .set({saldo : sql`${usuario.saldo} - ${transacao.valor}`})
       .where(eq(usuarioTable.id, transactionsTable.idUsuario));
 		});
-	}
+	},
+
+  carregarmovimentacao: async (idUsuario : number, tipoT : string) => {
+    const result = await db
+    .select()
+    .from(transactionsTable)
+    .where(and(
+      eq(transactionsTable.idUsuario, 1),
+      eq(transactionsTable.tipo, "entrada")
+    ))
+
+    return result
+  },
+
+  carregarSaldoUsuario: async (idUsuario : number) => {
+    const result = await db
+    .select({
+      saldo : usuarioTable.saldo
+    })
+    .from(usuarioTable)
+    .where(eq(usuarioTable.id, idUsuario))
+    return result
+  },
+
+
+
+
 });

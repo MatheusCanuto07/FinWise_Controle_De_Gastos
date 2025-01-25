@@ -5,43 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1735081929299,
-      "tag": "0000_greedy_the_stranger",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1735240490766,
-      "tag": "0001_silky_diamondback",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1735687315902,
-      "tag": "0002_sweet_radioactive_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1737226045063,
-      "tag": "0003_daily_elektra",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1737422382262,
-      "tag": "0004_burly_doctor_strange",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "6",
-      "when": 1737427383961,
-      "tag": "0005_lethal_cable",
+      "when": 1737819361954,
+      "tag": "0000_easy_corsair",
       "breakpoints": true
     }
   ]
