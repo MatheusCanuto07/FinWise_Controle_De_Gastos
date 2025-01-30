@@ -1,14 +1,14 @@
 import * as q from '$lib/db/queries';
 import type { PageServerLoad } from './$types';
 import { fail, type Actions } from "@sveltejs/kit";
-import { desc, eq, sql, between, and } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { db } from '$lib/db/db';
 import { usuarioTable } from '$lib/db/schema';
 
 export const load = (async () => {
   
 
-  const carregarSaldoUsuario = await db!
+  const carregarSaldoUsuario = db!
       .select({
         saldo : usuarioTable.saldo
       })

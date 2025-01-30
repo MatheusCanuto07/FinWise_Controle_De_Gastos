@@ -27,15 +27,16 @@ export const queries = () => ({
 		).toLocaleDateString();
 
 		console.log(primeiroDia, diaAtual);
-		return db
-			.select()
-			.from(transactionsTable)
-			.where(
-				and(
-					between(transactionsTable.data, primeiroDia.toString(), diaAtual.toString()),
-					eq(transactionsTable.tipo, tipo)
-				)
-			);
+    let q = db!
+    .select()
+    .from(transactionsTable)
+    .where(
+      and(
+        between(transactionsTable.data, primeiroDia.toString(), diaAtual.toString()),
+        eq(transactionsTable.tipo, tipo)
+      )
+    );
+		return q
 	},
 
 	enviarTransacao: async (transacao: transactionsModel, usuario : usuarioModel) => {
