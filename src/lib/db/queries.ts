@@ -49,19 +49,19 @@ export const queries = () => ({
 	},
 
   carregarmovimentacao: async (idUsuario : number, tipoT : string) => {
-    const result = await db
+    const result = await db!
     .select()
     .from(transactionsTable)
     .where(and(
-      eq(transactionsTable.idUsuario, 1),
-      eq(transactionsTable.tipo, "entrada")
+      eq(transactionsTable.idUsuario, idUsuario),
+      eq(transactionsTable.tipo, tipoT)
     ))
 
     return result
   },
 
   carregarSaldoUsuario: async (idUsuario : number) => {
-    const result = await db
+    const result = await db!
     .select({
       saldo : usuarioTable.saldo
     })
