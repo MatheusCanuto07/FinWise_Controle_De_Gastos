@@ -1,13 +1,13 @@
 <script lang="ts">
 	interface Props {
-    data: string;
-    banco: string | null;
-    tipo: string;
-    valor: number;
-    categoria: string;
-    recorrencia: number | null;
-    dataRecorrencia: number | null;
-    descricao: string | null;
+    data?: string;
+    banco?: string;
+    tipo?: string;
+    valor?: number;
+    categoria?: string;
+    recorrencia?: number;
+    dataRecorrencia?: number;
+    descricao?: string;
 	}
 
 	const { data, banco, tipo, valor, categoria, recorrencia, dataRecorrencia, descricao }: Props = $props();
