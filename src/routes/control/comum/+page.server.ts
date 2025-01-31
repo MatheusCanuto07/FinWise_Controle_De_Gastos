@@ -16,8 +16,7 @@ export const actions = {
   create: async (event : any) => {
     const formData = await event.request.formData();
 
-    const valorText = formData.get("valorText");
-    // Já pega o input selected de forma automática
+    const valorText = parseInt(formData.get("valorText"));
     const tipoText = formData.get("tipoText").toString();
     const categoriaText = formData.get("categoriaText").toString();
     const descText = formData.get("descText").toString();
@@ -26,11 +25,13 @@ export const actions = {
     
     try {
       const res = await q.queries().enviarTransacaoSimples({
+        data : dataText,
+        valor : valorText,
         tipo : tipoText,
-        data: dataText,
-        valor: valorText,
-        categoria: categoriaText,
-        idUsuario: 1
+        categoria : categoriaText,
+        descricao : descText,
+        idUsuario : 1,
+        formaPagamento : "debito"
       });
 
       return {
