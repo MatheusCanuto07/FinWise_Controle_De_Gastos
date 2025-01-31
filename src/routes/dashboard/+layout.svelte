@@ -24,7 +24,7 @@
 
 <div>
 	<div class="center flex flex-wrap justify-center">
-		<h1 class="text-2xl font-bold">{'R$ ' + saldo[0].saldo}</h1>
+		<h1 class="text-2xl font-bold">{'R$ '}</h1>
 		<h2 class="w-full text-center text-gray-800 opacity-50">R$ 213,00</h2>
 	</div>
 	<div class="flex flex-wrap">
