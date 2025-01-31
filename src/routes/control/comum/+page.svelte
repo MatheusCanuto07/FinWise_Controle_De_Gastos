@@ -69,8 +69,10 @@ use:enhance={({
 
   <div class="w-full flex justify-end mt-3">
     <button onclick={() => form?.reset()} class="btn btn-warning w-28 mr-2">Limpar</button>
-    <a class="btn btn-primary" href="intent://#Intent;package=com.samsung.android.spay&cId=000005923227;end;">Abrir App</a>
     <a class="btn btn-primary" href="intent://#Intent;package=com.samsung.android.spay;end;">Abrir App</a>
+    <a href="intent://#Intent;scheme=https;package=com.samsung.android.spay;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.samsung.android.spay;end;">
+      Abrir App se pa da bom
+    </a>    
     <button class="btn btn-success w-28 ">Enviar</button>
   </div>
 
