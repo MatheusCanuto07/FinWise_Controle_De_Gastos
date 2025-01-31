@@ -8,6 +8,7 @@ type transactionsSelect = typeof transactionsTable.$inferSelect;
 type usuarioModel = typeof usuarioTable.$inferSelect;
 type usuarioSelect = typeof usuarioTable.$inferInsert;
 
+// A biblioteca db retorna os resultados como um array de objetos
 export const queries = () => ({
 	listarTransacoes: async () => {
 		return db.select().from(transactionsTable);
@@ -17,24 +18,22 @@ export const queries = () => ({
 		return db.insert(transactionsTable).values(transacao);
 	},
 
-	listarTransacoesPeriodoAtual: async (tipo: string) => {
-		const hoje = new Date();
-		const primeiroDia = new Date(hoje.getFullYear(), hoje.getMonth(), 1).toLocaleDateString();
-		const diaAtual = new Date(
-			hoje.getFullYear(),
-			hoje.getMonth(),
-			hoje.getDate()
-		).toLocaleDateString();
+	carregarTransacoesDoUltimoMes: async (tipo: string, idUsuario: number) => {
+		const dataHoje = new Date();
+    const dataUmMesAtras = +new Date(dataHoje.getFullYear(), dataHoje.getMonth() - 1, dataHoje.getDate());
+		const diaAtual = +new Date();
+    // 1738281600000
+		console.log(dataUmMesAtras, diaAtual);
 
-		console.log(primeiroDia, diaAtual);
     let q = db!
     .select()
     .from(transactionsTable)
     .where(
       and(
-        between(transactionsTable.data, primeiroDia.toString(), diaAtual.toString()),
-        eq(transactionsTable.tipo, tipo)
-      )
+        between(transactionsTable.data, dataUmMesAtras.toString(), diaAtual.toString()),
+        eq(transactionsTable.tipo, tipo),
+        eq(transactionsTable.idUsuario, idUsuario)
+      ) 
     );
 		return q
 	},
@@ -63,15 +62,11 @@ export const queries = () => ({
 
   carregarSaldoUsuario: async (idUsuario : number) => {
     const result = await db!
-    .select({
-      saldo : usuarioTable.saldo
-    })
+    .select()
     .from(usuarioTable)
     .where(eq(usuarioTable.id, idUsuario))
     return result
   },
-
-
 
 
 });

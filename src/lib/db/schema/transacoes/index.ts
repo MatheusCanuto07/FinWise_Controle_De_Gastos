@@ -22,6 +22,7 @@ export const transactionsTable = sqliteTable("transactionsTable", {
   tipo: text("tipo").notNull(),
   data: text("data").notNull(),
   valor: integer("valor").notNull(),
+  formaPagamento : text("formaPagamento").notNull(),
   categoria: text("categoria").notNull(),
   recorrencia: integer("recorrencia"),
   dataRecorrencia: integer("dataRecorrencia"),

@@ -11,11 +11,13 @@
   }
 
   let { data, children }: { data: PageData, children : Snippet } = $props();
+  
+  let {saldo} = data;
 </script>
 
 <div>
   <div class="flex justify-center center flex-wrap">
-    <h1 class="text-2xl font-bold">R$ 2123,00</h1>
+    <h1 class="text-2xl font-bold">{"R$ " + saldo[0].saldo}</h1>
     <h2 class="text-gray-800 opacity-50 w-full text-center">R$ 213,00</h2>
   </div>
   <div class="flex flex-wrap">

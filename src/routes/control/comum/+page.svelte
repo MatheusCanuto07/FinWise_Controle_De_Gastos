@@ -7,10 +7,6 @@
 
 </script>
 
-<!-- <pre>
-  {JSON.stringify(data.todasTransacoes, null, 2)}
-</pre> -->
-
 <form method="POST" action="/control/comum?/create"
 use:enhance={({
   action,
@@ -27,7 +23,7 @@ use:enhance={({
   const dataText = formData.get("dataText");  
 
   return async () => {
-    // Callback
+    formElement.reset();
   };
 }}>
 <div class="mt-2">

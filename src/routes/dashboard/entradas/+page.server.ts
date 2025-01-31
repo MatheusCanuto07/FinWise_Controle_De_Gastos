@@ -4,11 +4,10 @@ import type { PageServerLoad } from './$types';
 
 export const load = (async ({params}) => {
   const url = params;
-
-  const todasTransacoes = await q.queries().listarTransacoesPeriodoAtual("entrada");
-  console.log(todasTransacoes);
+  // Preencher o banco com transações
+  const transacoesDoUltimoMes = await q.queries().carregarTransacoesDoUltimoMes("saida", 1);
   return {
-    todasTransacoes
+    transacoesDoUltimoMes
   };
 
 }) satisfies PageServerLoad;

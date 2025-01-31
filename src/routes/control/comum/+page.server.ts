@@ -7,16 +7,6 @@ import { usuarioTable } from '$lib/db/schema';
 
 export const load = (async () => {
   
-
-  const carregarSaldoUsuario = db!
-      .select({
-        saldo : usuarioTable.saldo
-      })
-      .from(usuarioTable)
-      .where(eq(usuarioTable.id, 1))
-
-  console.log(carregarSaldoUsuario)
-  
   return {
     
   };
@@ -27,26 +17,25 @@ export const actions = {
     const formData = await event.request.formData();
 
     const valorText = formData.get("valorText");
+    // Já pega o input selected de forma automática
     const tipoText = formData.get("tipoText").toString();
     const categoriaText = formData.get("categoriaText").toString();
     const descText = formData.get("descText").toString();
-    const dataText = formData.get("dataText").toString();
+    const dataText = (+new Date(formData.get("dataText"))).toString();
+    console.log(dataText)
     
     try {
       const res = await q.queries().enviarTransacaoSimples({
-        tipo : "",
+        tipo : tipoText,
         data: dataText,
-        valor: 10,
+        valor: valorText,
         categoria: categoriaText,
         idUsuario: 1
       });
 
-      console.log(res);
-
       return {
         success: true,
         message: "Adicionada com sucesso",
-        res : res
       }
    
     } catch (e: any) {
