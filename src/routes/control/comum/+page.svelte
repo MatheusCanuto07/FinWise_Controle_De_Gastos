@@ -69,7 +69,7 @@ use:enhance={({
 
   <div class="w-full flex justify-end mt-3">
     <button onclick={() => form?.reset()} class="btn btn-warning w-28 mr-2">Limpar</button>
-    <a class="btn btn-primary" href="intent://tela#Intent;package=com.samsung.android.spay;end;">Abrir App</a>
+    <a class="btn btn-primary" href="intent://tela#Intent;package=com.samsung.android.spay.ui.SpayMainActivity;end;">Abrir App</a>
     <button class="btn btn-success w-28 ">Enviar</button>
   </div>
 
