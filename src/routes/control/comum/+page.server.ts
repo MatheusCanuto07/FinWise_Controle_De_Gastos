@@ -21,7 +21,7 @@ export const actions = {
     const categoriaText = formData.get("categoriaText").toString();
     const descText = formData.get("descText").toString();
     const dataText = (+new Date(formData.get("dataText"))).toString();
-    console.log(dataText)
+
     
     try {
       const res = await q.queries().enviarTransacaoSimples({
