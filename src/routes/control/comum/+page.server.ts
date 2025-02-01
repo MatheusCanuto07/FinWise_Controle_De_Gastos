@@ -20,12 +20,26 @@ export const actions = {
     const tipoText = formData.get("tipoText").toString();
     const categoriaText = formData.get("categoriaText").toString();
     const descText = formData.get("descText").toString();
-    const dataText = (+new Date(formData.get("dataText"))).toString();
+    const dataText = formData.get("dataText").toString();
 
+    function timeStampForDate(ts : Date){
+      
+
+      const dia = ts.getUTCDate();
+      const mes = ts.getMonth() + 1;
+      const ano = ts.getFullYear();
+      return `${dia}-${mes}-${ano}`;
+    }
+
+    let timeStamp = (new Date(dataText)).getTime();
+
+    console.log(timeStamp);
+    console.log(new Date(timeStamp))
+    console.log(timeStampForDate(new Date(timeStamp)))
     
     try {
       const res = await q.queries().enviarTransacaoSimples({
-        data : dataText,
+        data : timeStamp.toString(),
         valor : valorText,
         tipo : tipoText,
         categoria : categoriaText,

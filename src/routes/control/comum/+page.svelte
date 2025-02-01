@@ -4,6 +4,7 @@
   
   let defaultDate = $state(new Date().toISOString().split('T')[0]);
   let form : HTMLFormElement | undefined = $state(undefined)
+  let abrirAppPagamento = $state(false  )
 
   let { data }: { data: PageData } = $props();
 
@@ -67,13 +68,20 @@ use:enhance={({
     <input bind:value={defaultDate} name="dataText" id="dataText" type="date" class="input input-bordered w-full">
   </label>
 
+  <div class="form-control">
+    <label class="label cursor-pointer">
+      <span class="label-text">Abrir metodo de pagamento</span>
+      <input type="checkbox" class="checkbox" bind:checked={abrirAppPagamento}>
+    </label>
+  </div>
+
   <div class="w-full flex justify-end mt-3">
     <button onclick={() => form?.reset()} class="btn btn-warning w-28 mr-2">Limpar</button>
-    <a class="btn btn-primary" href="intent://#Intent;package=com.samsung.android.spay;end;">Abrir App</a>
-    <a href="intent://#Intent;scheme=https;package=com.samsung.android.spay;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.samsung.android.spay;end;">
-      Abrir App se pa da bom
-    </a>    
-    <button class="btn btn-success w-28 ">Enviar</button>
+    {#if abrirAppPagamento}
+      <a class="btn btn-primary" type="submitter" href="intent://#Intent;package=com.samsung.android.spay;end;">Enviar</a>
+      {:else}
+      <button class="btn btn-success w-28 ">Enviar</button>
+    {/if}
   </div>
 
 </form>

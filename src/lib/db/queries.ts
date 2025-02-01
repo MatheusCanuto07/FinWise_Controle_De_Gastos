@@ -1,4 +1,4 @@
-import { desc, eq, sql, between, and } from 'drizzle-orm';
+import { desc, eq, sql, between, and, asc } from 'drizzle-orm';
 import { transactionsTable, usuarioTable } from './schema';
 import { db } from './db';
 
@@ -34,7 +34,10 @@ export const queries = () => ({
         eq(transactionsTable.tipo, tipo),
         eq(transactionsTable.idUsuario, idUsuario)
       ) 
-    );
+    )
+    .orderBy(
+      asc(transactionsTable.data)  
+    )
 		return q
 	},
 

@@ -14,6 +14,7 @@ export const usuarioTable = sqliteTable("usuarioTable", {
 
 export const userRelations = relations(usuarioTable, ({ many }) => ({
   transactios : many(transactionsTable),
+  categorias : many(userCategory),
 }))
 
 export const transactionsTable = sqliteTable("transactionsTable", {
@@ -39,3 +40,17 @@ export const transactionRelations = relations(transactionsTable, ({ one }) => ({
 
 export type transactionsTable = typeof transactionsTable.$inferInsert;
 export type usuarioTable = typeof usuarioTable.$inferInsert;
+export type userCategory = typeof userCategory.$inferInsert;
+
+export const userCategory = sqliteTable("userCategoryTable", {
+  id: int("id").primaryKey(),
+  name: text("name").notNull(),
+  idUser: int("idUser").notNull(),
+})
+
+export const userCategoryRelations = relations(userCategory, ({ one }) => ({
+  user: one(usuarioTable, {
+    fields: [userCategory.idUser],
+    references: [usuarioTable.id],
+  }),
+}))
