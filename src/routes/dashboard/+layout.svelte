@@ -14,18 +14,19 @@
   
 	let { data, children }: { data: PageData; children: Snippet } = $props();
   
-	let { saldo } = data;
+	let { saldo, totalEntradas, totalSaidas, total } = $derived(data);
+  console.log(total[0].total)
 
 </script>
 
 <div>
 	<div class="center flex flex-wrap justify-center">
-		<h1 class="text-2xl font-bold">{'R$ ' + (saldo[0].saldo)}</h1>
-		<h2 class="w-full text-center text-gray-800 opacity-50">R$ 213,00</h2>
+		<h1 class="text-2xl font-bold">{'R$ ' + (total[0].total / 100).toLocaleString('pt-BR')}</h1>
+		<h2 class="w-full text-center text-gray-800 opacity-50">{'Saldo: R$ ' + (saldo[0].saldo / 100).toLocaleString('pt-BR')}</h2>
 	</div>
 	<div class="flex flex-wrap">  
-		<CardHomeDinheiro />
-		<CardHomeDinheiro />
+		<CardHomeDinheiro total={(totalEntradas[0].total / 100).toLocaleString('pt-BR')} tipo={'entrada'}/>
+		<CardHomeDinheiro total={(totalSaidas[0].total / 100).toLocaleString('pt-BR')} tipo={'saida'}/>
 	</div>
 
 	<div role="tablist" class="tabs tabs-bordered">
@@ -47,6 +48,12 @@
       class="tab"
       class:tab-active={isActive('/dashboard/dividas')}
       >Dividas</a>
+    <a 
+      href="/dashboard/devedores"
+      role="tab"
+      class="tab"
+      class:tab-active={isActive('/dashboard/devedores')}
+      >Devedores</a>
 	</div>
 
   <SelectPeriod />

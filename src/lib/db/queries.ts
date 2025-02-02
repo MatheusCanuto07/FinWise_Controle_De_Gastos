@@ -1,4 +1,4 @@
-import { desc, eq, sql, between, and, asc } from 'drizzle-orm';
+import { desc, eq, sql, between, and, asc, sum } from 'drizzle-orm';
 import { transactionsTable, usuarioTable } from './schema';
 import { db } from './db';
 
@@ -7,6 +7,18 @@ type transactionsSelect = typeof transactionsTable.$inferSelect;
 
 type usuarioModel = typeof usuarioTable.$inferSelect;
 type usuarioSelect = typeof usuarioTable.$inferInsert;
+
+function getLastMonthDate(){
+  const dataHoje = new Date();
+  const dataUmMesAtras = (new Date(dataHoje.getUTCFullYear(), dataHoje.getUTCMonth() - 1, dataHoje.getUTCDate())).getTime();
+  const diaAtual = (new Date().getTime());
+  
+  return {
+    dataHoje,
+    dataUmMesAtras,
+    diaAtual
+  }
+}
 
 // A biblioteca db retorna os resultados como um array de objetos
 export const queries = () => ({
@@ -19,27 +31,42 @@ export const queries = () => ({
 	},
 
 	carregarTransacoesDoUltimoMes: async (tipo: string, idUsuario: number) => {
-		const dataHoje = new Date();
-    const dataUmMesAtras = +new Date(dataHoje.getFullYear(), dataHoje.getMonth() - 1, dataHoje.getDate());
-		const diaAtual = +new Date();
-    // 1738281600000
-		console.log(dataUmMesAtras, diaAtual);
+    let d = getLastMonthDate()
 
     let q = db!
     .select()
     .from(transactionsTable)
     .where(
       and(
-        between(transactionsTable.data, dataUmMesAtras.toString(), diaAtual.toString()),
+        between(transactionsTable.data, d.dataUmMesAtras.toString(), d.diaAtual.toString()),
         eq(transactionsTable.tipo, tipo),
         eq(transactionsTable.idUsuario, idUsuario)
       ) 
     )
     .orderBy(
-      asc(transactionsTable.data)  
+      desc(transactionsTable.data)  
     )
 		return q
 	},
+
+  carregarTotalTransacoesTipoMes: async(tipo: string, idUsuario: number) => {
+    let d = getLastMonthDate()
+
+    let q = db!
+    .select({
+      total : sum(transactionsTable.valor)
+    })
+    .from(transactionsTable)
+    .where(
+      and(
+        eq(transactionsTable.idUsuario, idUsuario),
+        eq(transactionsTable.tipo, tipo),
+        between(transactionsTable.data, d.dataUmMesAtras.toString(), d.diaAtual.toString())
+      )
+    )
+
+    return q
+  },
 
 	enviarTransacao: async (transacao: transactionsModel, usuario : usuarioModel) => {
 		return db.transaction(async (t) => {

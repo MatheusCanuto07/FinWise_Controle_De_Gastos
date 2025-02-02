@@ -13,6 +13,7 @@
       valor={t.valor}
       descricao={t.descricao ? t.descricao : undefined}
       data={t.data}
+      imgProp={"nuBank"}
     />
 	{/each}
 </div>

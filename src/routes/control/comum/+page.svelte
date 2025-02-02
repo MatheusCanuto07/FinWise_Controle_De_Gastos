@@ -44,6 +44,8 @@ use:enhance={({
     <select name="tipoText" id="tipoText" class="select select-bordered w-full">
       <option selected value="saida">Saida</option>
       <option value="entrada">Entrada</option>
+      <option value="divida">Divida</option>
+      <option value="devedor">Devedor</option>
     </select>
   </label>
 

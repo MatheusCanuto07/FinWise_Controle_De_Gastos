@@ -16,7 +16,7 @@ export const actions = {
   create: async (event : any) => {
     const formData = await event.request.formData();
 
-    const valorText = parseInt(formData.get("valorText"));
+    const valorText = parseInt(formData.get("valorText")) * 100;
     const tipoText = formData.get("tipoText").toString();
     const categoriaText = formData.get("categoriaText").toString();
     const descText = formData.get("descText").toString();
@@ -26,17 +26,14 @@ export const actions = {
       
 
       const dia = ts.getUTCDate();
-      const mes = ts.getMonth() + 1;
-      const ano = ts.getFullYear();
+      const mes = ts.getUTCMonth() + 1;
+      const ano = ts.getUTCFullYear();
       return `${dia}-${mes}-${ano}`;
     }
 
     let timeStamp = (new Date(dataText)).getTime();
+    let data = new Date(timeStamp);
 
-    console.log(timeStamp);
-    console.log(new Date(timeStamp))
-    console.log(timeStampForDate(new Date(timeStamp)))
-    
     try {
       const res = await q.queries().enviarTransacaoSimples({
         data : timeStamp.toString(),
@@ -45,7 +42,7 @@ export const actions = {
         categoria : categoriaText,
         descricao : descText,
         idUsuario : 1,
-        formaPagamento : "debito"
+        formaPagamento : "debito",
       });
 
       return {

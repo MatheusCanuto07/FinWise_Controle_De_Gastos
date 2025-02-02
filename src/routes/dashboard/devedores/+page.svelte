@@ -5,7 +5,7 @@
   let { data }: { data: PageData } = $props();
 </script>
 
-{#each data.listaDividas as d}
+{#each data.listaDevedores as d}
   <CardMovimentacao 
     banco={d.banco ? d.banco : undefined} 
     formaPagamento={d.formaPagamento} 
