@@ -47,36 +47,36 @@ O sistema deve permitir o cadastro de receitas e despesas categorizadas. :white_
 
 O usuário poderá visualizar gráficos e relatórios de gastos. :black_square_button:
 
-O sistema deve permitir a definição de orçamentos mensais por categoria.
+O sistema deve permitir a definição de orçamentos mensais por categoria. :black_square_button:
 
-Deve ser possível importar extratos bancários nos formatos CSV e OFX.
+Deve ser possível importar extratos bancários nos formatos CSV e OFX. :black_square_button:
 
-O sistema deve enviar notificações caso os gastos ultrapassem a média mensal.
+O sistema deve enviar notificações caso os gastos ultrapassem a média mensal. :black_square_button:
 
 RF02 - Definição de Objetivos Financeiros
 
-O usuário poderá criar metas financeiras personalizadas.
+O usuário poderá criar metas financeiras personalizadas. :black_square_button:
 
-O sistema deve acompanhar e exibir o progresso das metas.
+O sistema deve acompanhar e exibir o progresso das metas. :black_square_button:
 
-O sistema deve permitir a automação de transferências para poupança baseadas nas metas.
+O sistema deve permitir a automação de transferências para poupança baseadas nas metas. :black_square_button:
 
 RF03 - Cobrança de Amigos
 
-O usuário poderá criar cobranças para dividir contas com amigos.
+O usuário poderá criar cobranças para dividir contas com amigos. :black_square_button:
 
-O sistema deve permitir a geração de links de pagamento via Pix, boleto ou transferência.
+O sistema deve permitir a geração de links de pagamento via Pix, boleto ou transferência. :black_square_button:
 
-Deve ser possível visualizar o histórico de cobranças e pagamentos recebidos.
+Deve ser possível visualizar o histórico de cobranças e pagamentos recebidos. :black_square_button:
 
-O sistema deve enviar lembretes automáticos para cobranças pendentes.
+O sistema deve enviar lembretes automáticos para cobranças pendentes. :black_square_button:
 
 RF04 - Calendário Financeiro
 
-O sistema deve permitir o agendamento de contas a pagar e receber.
+O sistema deve permitir o agendamento de contas a pagar e receber. :black_square_button:
 
-O usuário poderá integrar o calendário financeiro com o Google Calendar.
+O usuário poderá integrar o calendário financeiro com o Google Calendar. :black_square_button:
 
-O sistema deve permitir a configuração de eventos financeiros recorrentes.
+O sistema deve permitir a configuração de eventos financeiros recorrentes. :black_square_button:
 
-O sistema deve enviar notificações de vencimento de contas.
+O sistema deve enviar notificações de vencimento de contas. :black_square_button:
