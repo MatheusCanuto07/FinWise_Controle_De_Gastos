@@ -41,7 +41,7 @@ You can preview the production build with `npm run preview`.
 
 Requisitos Funcionais (RF)
 
-RF01 - Gestão de Gastos Pessoais
+RF01 - Gestão de Gastos Pessoais :black_square_button:
 
 O sistema deve permitir o cadastro de receitas e despesas categorizadas. :white_check_mark:
 
@@ -53,7 +53,7 @@ Deve ser possível importar extratos bancários nos formatos CSV e OFX. :black_s
 
 O sistema deve enviar notificações caso os gastos ultrapassem a média mensal. :black_square_button:
 
-RF02 - Definição de Objetivos Financeiros
+RF02 - Definição de Objetivos Financeiros :black_square_button:
 
 O usuário poderá criar metas financeiras personalizadas. :black_square_button:
 
@@ -61,7 +61,7 @@ O sistema deve acompanhar e exibir o progresso das metas. :black_square_button:
 
 O sistema deve permitir a automação de transferências para poupança baseadas nas metas. :black_square_button:
 
-RF03 - Cobrança de Amigos
+RF03 - Cobrança de Amigos :black_square_button:
 
 O usuário poderá criar cobranças para dividir contas com amigos. :black_square_button:
 
@@ -71,7 +71,7 @@ Deve ser possível visualizar o histórico de cobranças e pagamentos recebidos.
 
 O sistema deve enviar lembretes automáticos para cobranças pendentes. :black_square_button:
 
-RF04 - Calendário Financeiro
+RF04 - Calendário Financeiro :black_square_button:
 
 O sistema deve permitir o agendamento de contas a pagar e receber. :black_square_button:
 
