@@ -1,6 +1,15 @@
-import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { fail, type Actions } from "@sveltejs/kit";
+import { eq } from 'drizzle-orm';
+import { db } from '$lib/db/db';
 
 export const load = (async () => {
-	return redirect(303, "/control/comum");
+  
+  return {
+    
+  };
 }) satisfies PageServerLoad;
+
+export const actions = {
+  
+} satisfies Actions;

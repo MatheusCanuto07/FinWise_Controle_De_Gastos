@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1737819361954,
-      "tag": "0000_easy_corsair",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1738287172843,
-      "tag": "0001_serious_mercury",
+      "when": 1753917156183,
+      "tag": "0000_open_monster_badoon",
       "breakpoints": true
     }
   ]
