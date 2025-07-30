@@ -169,3 +169,12 @@ async function createCartao(cartao : CartaoInsert) {
   }
   return { id: 0 };
 }
+
+export {
+  insertTransaction,
+  selectTransactions,
+  deleteTransaction,
+  createCategory,
+  deleteCategory,
+  createCartao
+} 

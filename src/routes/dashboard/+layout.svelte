@@ -16,6 +16,53 @@
 </script>
 
 <div>
+  <div class="w-full flex justify-center gap-4">
+    <div class="card bg-base-200 w-64">
+      <div class="card-body p-4">
+        <h3 class="font-semibold">Saldo Disponível</h3>
+        <p class="text-3xl font-bold">R$ 4.850,75</p>
+        <select class="select select-bordered select-sm w-full mb-2 mt-2">
+          <option selected>Cartão Principal</option>
+          <option>Cartão de Crédito</option>
+          <option>Conta Poupança</option>
+        </select>
+      </div>
+    </div>
+    <div class="card bg-base-200 w-64">
+      <div class="card-body p-4">
+        <h3 class="font-semibold">Gastos previstos</h3>
+        <p class="text-3xl font-bold">R$ 4.850,75</p>
+        <select class="select select-bordered select-sm w-full mb-2 mt-2">
+          <option selected>Cartão Principal</option>
+          <option>Cartão de Crédito</option>
+          <option>Conta Poupança</option>
+        </select>
+      </div>
+    </div>
+    <div class="card bg-base-200 w-64">
+      <div class="card-body p-4">
+        <h3 class="font-semibold">Cartão de crédito</h3>
+        <p class="text-3xl font-bold">R$ 4.850,75</p>
+        <select class="select select-bordered select-sm w-full mb-2 mt-2">
+          <option selected>Cartão Principal</option>
+          <option>Cartão de Crédito</option>
+          <option>Conta Poupança</option>
+        </select>
+      </div>
+    </div>
+    <div class="card bg-base-200 w-64">
+      <div class="card-body p-4">
+        <h3 class="font-semibold">Vale refeição</h3>
+        <p class="text-3xl font-bold">R$ 4.850,75</p>
+        <select class="select select-bordered select-sm w-full mb-2 mt-2">
+          <option selected>Cartão Principal</option>
+          <option>Cartão de Crédito</option>
+          <option>Conta Poupança</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
 	<div role="tablist" class="tabs tabs-bordered">
 		<a
 			href="/dashboard/entradas"
