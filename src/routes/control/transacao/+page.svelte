@@ -2,6 +2,19 @@
   import type { PageData } from './$types';
   let { data }: { data: PageData } = $props();
   
+  let valor = $state("0");
+  function validaValor(){
+    const moneyRegex = /^\d+(?:[.,]\d{0,2})?$/;
+    if (!moneyRegex.test(valor)) {
+      valor = valor.slice(0, -1);
+    }
+  }
+  
+  var agora = new Date();
+  var dia = ("0" + agora.getDate()).slice(-2);
+  var mes = ("0" + (agora.getMonth() + 1)).slice(-2);
+  var dataHoje = agora.getFullYear()+"-"+(mes)+"-"+(dia);
+  let date = $state(dataHoje);
 </script>
 
 <form action="?/insert" class="max-w-md mx-auto p-6 bg-base-200 rounded-lg shadow-md space-y-4">
@@ -11,13 +24,16 @@
     <label for="valor" class="label">
       <span class="label-text">Valor</span>
     </label>
-    <input 
-      type="number" 
-      id="valor" 
-      name="valor" 
-      class="input input-bordered w-full" 
+    <input
+      value={valor}
+      oninput={validaValor}
+      type="number"
+      id="valor"
+      name="valor"
+      class="input input-bordered w-full"
+      inputmode="decimal"
       required
-    >
+    />
   </div>
 
   <div class="form-control">
@@ -25,6 +41,7 @@
       <span class="label-text">Data</span>
     </label>
     <input 
+      value={date}
       type="date" 
       id="data" 
       name="data" 
