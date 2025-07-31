@@ -1,7 +1,4 @@
 <script lang="ts">
-	import CardHomeDinheiro from '$lib/components/CardHomeDinheiro.svelte';
-	import CardMovimentacao from '$lib/components/CardMovimentacao.svelte';
-	import Tab from '$lib/components/Tab.svelte';
 	import type { Snippet } from 'svelte';
 	import type { PageData } from './$types';
 	import { page } from '$app/state';
@@ -10,9 +7,9 @@
 	function isActive(href: string) {
 		return page.url.pathname.startsWith(href);
 	}
-
-  
+ 
 	let { data, children }: { data: PageData; children: Snippet } = $props();
+  let { saldo, gastosPrevistos } = data;
 </script>
 
 <div>
@@ -20,7 +17,7 @@
     <div class="card bg-base-200 w-64">
       <div class="card-body p-4">
         <h3 class="font-semibold">Saldo Disponível</h3>
-        <p class="text-3xl font-bold">R$ 4.850,75</p>
+        <p class="text-3xl font-bold">{(saldo / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
         <select class="select select-bordered select-sm w-full mb-2 mt-2">
           <option selected>Cartão Principal</option>
           <option>Cartão de Crédito</option>
@@ -31,7 +28,7 @@
     <div class="card bg-base-200 w-64">
       <div class="card-body p-4">
         <h3 class="font-semibold">Gastos previstos</h3>
-        <p class="text-3xl font-bold">R$ 4.850,75</p>
+        <p class="text-3xl font-bold">{gastosPrevistos}</p>
         <select class="select select-bordered select-sm w-full mb-2 mt-2">
           <option selected>Cartão Principal</option>
           <option>Cartão de Crédito</option>
