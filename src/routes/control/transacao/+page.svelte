@@ -4,7 +4,7 @@
   
 </script>
 
-<form class="max-w-md mx-auto p-6 bg-base-200 rounded-lg shadow-md space-y-4">
+<form action="?/insert" class="max-w-md mx-auto p-6 bg-base-200 rounded-lg shadow-md space-y-4">
   <h2 class="text-xl font-bold text-center">Cadastrar uma nova transação</h2>
 
   <div class="form-control">
@@ -86,11 +86,51 @@
         type="checkbox" 
         id="recorrencia" 
         name="recorrencia" 
-        class="checkbox checkbox-primary"
-      >
+        class="checkbox checkbox-primary">
       <label for="recorrencia" class="cursor-pointer">Esta transação é recorrente?</label>
     </div>
   </div>
 
+  <div class="form-control">
+    <label for="tempoRecorrencia" class="label">
+      <span class="label-text">Quantas vezes essa transação vai acontecer</span>
+    </label>
+    <div class="flex items-center gap-2">
+      <input 
+        type="number" 
+        id="tempoRecorrencia" 
+        name="tempoRecorrencia" 
+        class="input input-bordered w-full">
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="tipoRecorrencia" class="label">
+      <span class="label-text">Tipo de recorrencia</span>
+    </label>
+    <div class="flex items-center gap-2">
+      <select id="tipoRecorrencia" name="tipoRecorrencia" class="select select-bordered w-full" required>
+        <option value="" disabled selected>Selecione</option>
+        <option value="dUteis">Dias úteis</option>
+        <option value="diaria">Diária</option>
+        <option value="semanal">Semanal</option>
+        <option value="mensal">Mensal</option>
+        <option value="anual">Anual</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="diaOcorrencia" class="label">
+      <span class="label-text">Dia da ocorrência</span>
+    </label>
+    <div class="flex items-center gap-2">
+      <input 
+        type="number" 
+        id="diaOcorrencia" 
+        name="diaOcorrencia" 
+        class="input input-bordered w-full">
+    </div>
+  </div>
   <button type="submit" class="btn btn-primary w-full mt-4">Cadastrar Transação</button>
 </form>
