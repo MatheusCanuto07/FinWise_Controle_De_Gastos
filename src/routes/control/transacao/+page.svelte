@@ -1,7 +1,9 @@
 <script lang="ts">
   import type { PageData } from './$types';
   let { data }: { data: PageData } = $props();
-  
+  let categorias = data.categorias;
+  let cartoes = data.cartoes;
+
   let valor = $state("0");
   function validaValor(){
     const moneyRegex = /^\d+(?:[.,]\d{0,2})?$/;
@@ -56,8 +58,9 @@
     </label>
     <select id="idCategoria" name="idCategoria" class="select select-bordered w-full" required>
       <option value="" disabled selected>Selecione</option>
-      <option value="1">Alimentação</option>
-      <option value="2">Transporte</option>
+      {#each categorias as c}
+         <option value="{c.id}">{c.nome}</option>
+      {/each}
     </select>
   </div>
 
@@ -67,8 +70,9 @@
     </label>
     <select id="idCartao" name="idCartao" class="select select-bordered w-full" required>
       <option value="" disabled selected>Selecione</option>
-      <option value="1">Cartão Principal</option>
-      <option value="2">Cartão Crédito</option>
+      {#each cartoes as c}
+        <option value="{c.id}">{c.nome +"-"+ c.tipo}</option>
+      {/each}
     </select>
   </div>
 

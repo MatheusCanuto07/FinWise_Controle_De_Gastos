@@ -170,11 +170,41 @@ async function createCartao(cartao : CartaoInsert) {
   return { id: 0 };
 }
 
+async function getCartoes(idUser : number){
+  try{
+    const result = await db
+      .select()
+      .from(cartaoTable)
+      .where(eq(cartaoTable.idUser, idUser))
+      .execute();
+    return result;
+  } catch(error){
+    console.error('Erro ao buscar cartões:', error);
+    throw error;
+  }
+}
+
+async function getCategorias(idUser : number){
+  try{
+    const result = await db
+      .select()
+      .from(categoriaTable)
+      .where(eq(categoriaTable.idUser, idUser))
+      .execute();
+    return result;
+  } catch(error){
+    console.error('Erro ao buscar categorias:', error);
+    throw error;
+  }
+}
+
 export {
   insertTransaction,
   selectTransactions,
   deleteTransaction,
   createCategory,
   deleteCategory,
-  createCartao
+  createCartao,
+  getCategorias,
+  getCartoes
 } 

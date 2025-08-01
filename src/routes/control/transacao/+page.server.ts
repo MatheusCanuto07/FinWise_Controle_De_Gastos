@@ -1,12 +1,16 @@
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
-import {insertTransaction} from "$lib/db/Controller";
+import {insertTransaction, getCategorias, getCartoes} from "$lib/db/Controller";
 import type { TransactionInsert } from '$lib/db/schema/tables';
 import {dataParaTimestamp, timestampParaData} from '$lib/utils/functions';
 
 export const load = (async () => {
-  
-  return {};
+  let categorias = await getCategorias(1);
+  let cartoes = await getCartoes(1);
+  return {
+    categorias,
+    cartoes
+  };
 }) satisfies PageServerLoad;
 
 export const actions = {

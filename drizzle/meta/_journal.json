@@ -8,6 +8,20 @@
       "when": 1753917156183,
       "tag": "0000_open_monster_badoon",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1754010593901,
+      "tag": "0002_salty_mordo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1754010935832,
+      "tag": "0003_robust_sharon_ventura",
+      "breakpoints": true
     }
   ]
 }

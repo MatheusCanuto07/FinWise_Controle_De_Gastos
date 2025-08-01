@@ -25,8 +25,9 @@ export const transactionTable = sqliteTable('transaction', {
 export const cartaoTable = sqliteTable('cartao', {
   id: integer('id').primaryKey().notNull(),
   idUser: integer('idUser').notNull(),
+  nome: text('nome').notNull(),
   tipo: text('tipo').notNull(),
-  dataVencimento: text('dataVencimento').notNull()
+  diaVencimento: integer('diaVencimento').notNull()
 });
 
 export const categoriaTable = sqliteTable('categoria', {

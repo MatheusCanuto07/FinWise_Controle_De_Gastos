@@ -1,0 +1,1 @@
+ALTER TABLE `cartao` RENAME COLUMN `dataVencimento` TO `diaVencimento`;
