@@ -5,6 +5,7 @@ import {
   cartaoTable,
   categoriaTable,
   usuarioTable,
+  lembretesTable
 } from './schema/tables'; 
 
 import type {
@@ -15,7 +16,9 @@ import type {
   CategoriaSelect,
   CategoriaInsert,
   UsuarioSelect,
-  UsuarioInsert
+  UsuarioInsert,
+  LembreteInsert,
+  LembreteSelect
 } from './schema/tables';
 
 import * as constant from '../utils/index';
@@ -198,6 +201,47 @@ async function getCategorias(idUser : number){
   }
 }
 
+async function createLembrete(lembrete : LembreteInsert){
+  try{
+    const [result] = await db
+      .insert(lembretesTable)
+      .values(lembrete).
+      returning({ id: lembretesTable.id });
+    return {id: result.id};
+  } catch(error){
+    console.error('Erro ao inserir insumo:', error);
+  }
+}
+
+async function getLembretes(idUser : number){
+  try{
+    const result = await db
+      .select()
+      .from(lembretesTable)
+      .where(eq(lembretesTable.idUser, idUser))
+      .execute();
+    return result;
+  } catch(error){
+    console.error('Erro ao buscar lembretes:', error);
+    throw error;
+  }
+}
+
+async function getLastThreeLembretes(idUser : number){
+  try{
+    const result = await db
+      .select()
+      .from(lembretesTable)
+      .where(eq(lembretesTable.idUser, idUser))
+      .limit(3)
+      .execute();
+    return result;
+  } catch(error){
+    console.error('Erro ao buscar lembretes:', error);
+    throw error;
+  }
+}
+
 export {
   insertTransaction,
   selectTransactions,
@@ -206,5 +250,8 @@ export {
   deleteCategory,
   createCartao,
   getCategorias,
-  getCartoes
+  getCartoes,
+  createLembrete,
+  getLembretes,
+  getLastThreeLembretes
 } 

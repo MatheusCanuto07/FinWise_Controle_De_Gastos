@@ -16,7 +16,7 @@
   <div class="w-full flex justify-center gap-4">
     <div class="card bg-base-200 w-64">
       <div class="card-body p-4">
-        <h3 class="font-semibold">Saldo Disponível</h3>
+        <h3 class="font-semibold">Saldo Total Disponível</h3>
         <p class="text-3xl font-bold">{(saldo / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
         <select class="select select-bordered select-sm w-full mb-2 mt-2">
           <option selected>Cartão Principal</option>
@@ -65,30 +65,26 @@
 			href="/dashboard/entradas"
 			role="tab"
 			class="tab"
-			class:tab-active={isActive('/dashboard/entradas')}>Entradas</a
-		>
+			class:tab-active={isActive('/dashboard/entradas')}>
+      Entradas
+    </a>
 		<a
 			href="/dashboard/saidas"
 			role="tab"
 			class="tab"
-			class:tab-active={isActive('/dashboard/saidas')}>Saidas</a
-		>
+			class:tab-active={isActive('/dashboard/saidas')}>
+      Saidas
+    </a>
     <a 
-      href="/dashboard/dividas"
+      href="/dashboard/lembretes"
       role="tab"
       class="tab"
-      class:tab-active={isActive('/dashboard/dividas')}
-      >Dividas</a>
-    <a 
-      href="/dashboard/devedores"
-      role="tab"
-      class="tab"
-      class:tab-active={isActive('/dashboard/devedores')}
-      >Devedores</a>
+      class:tab-active={isActive('/dashboard/lembretes')}>
+      Lembretes
+    </a>
 	</div>
 
   <SelectPeriod />
   
-
 	{@render children()}
 </div>

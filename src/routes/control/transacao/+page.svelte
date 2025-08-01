@@ -3,8 +3,9 @@
   let { data }: { data: PageData } = $props();
   let categorias = data.categorias;
   let cartoes = data.cartoes;
-
-  let valor = $state("0");
+  
+  
+  
   function validaValor(){
     const moneyRegex = /^\d+(?:[.,]\d{0,2})?$/;
     if (!moneyRegex.test(valor)) {
@@ -13,10 +14,13 @@
   }
   
   var agora = new Date();
-  var dia = ("0" + agora.getDate()).slice(-2);
   var mes = ("0" + (agora.getMonth() + 1)).slice(-2);
+  var dia = ("0" + agora.getDate()).slice(-2);
   var dataHoje = agora.getFullYear()+"-"+(mes)+"-"+(dia);
+
+  let valor = $state("0");
   let date = $state(dataHoje);
+  let recorrencia = $state(false);
 </script>
 
 <form action="?/insert" class="max-w-md mx-auto p-6 bg-base-200 rounded-lg shadow-md space-y-4">
@@ -71,7 +75,7 @@
     <select id="idCartao" name="idCartao" class="select select-bordered w-full" required>
       <option value="" disabled selected>Selecione</option>
       {#each cartoes as c}
-        <option value="{c.id}">{c.nome +"-"+ c.tipo}</option>
+        <option value="{c.id}">{c.nome + " - " + c.tipo}</option>
       {/each}
     </select>
   </div>
@@ -88,22 +92,12 @@
   </div>
 
   <div class="form-control">
-    <label for="tipo" class="label">
-      <span class="label-text">Tipo</span>
-    </label>
-    <select id="tipo" name="tipo" class="select select-bordered w-full" required>
-      <option value="" disabled selected>Selecione</option>
-      <option value="entrada">Entrada</option>
-      <option value="saida">Saída</option>
-    </select>
-  </div>
-
-  <div class="form-control">
     <label for="recorrencia" class="label">
       <span class="label-text">Recorrência</span>
     </label>
     <div class="flex items-center gap-2">
       <input 
+        value={recorrencia}
         type="checkbox" 
         id="recorrencia" 
         name="recorrencia" 
@@ -111,47 +105,48 @@
       <label for="recorrencia" class="cursor-pointer">Esta transação é recorrente?</label>
     </div>
   </div>
-
-  <div class="form-control">
-    <label for="tempoRecorrencia" class="label">
-      <span class="label-text">Quantas vezes essa transação vai acontecer</span>
-    </label>
-    <div class="flex items-center gap-2">
-      <input 
-        type="number" 
-        id="tempoRecorrencia" 
-        name="tempoRecorrencia" 
-        class="input input-bordered w-full">
+  {#if recorrencia}
+    <div class="form-control">
+      <label for="tempoRecorrencia" class="label">
+        <span class="label-text">Quantas vezes essa transação vai acontecer</span>
+      </label>
+      <div class="flex items-center gap-2">
+        <input 
+          type="number" 
+          id="tempoRecorrencia" 
+          name="tempoRecorrencia" 
+          class="input input-bordered w-full">
+      </div>
     </div>
-  </div>
 
-  <div class="form-control">
-    <label for="tipoRecorrencia" class="label">
-      <span class="label-text">Tipo de recorrencia</span>
-    </label>
-    <div class="flex items-center gap-2">
-      <select id="tipoRecorrencia" name="tipoRecorrencia" class="select select-bordered w-full" required>
-        <option value="" disabled selected>Selecione</option>
-        <option value="dUteis">Dias úteis</option>
-        <option value="diaria">Diária</option>
-        <option value="semanal">Semanal</option>
-        <option value="mensal">Mensal</option>
-        <option value="anual">Anual</option>
-      </select>
+    <div class="form-control">
+      <label for="tipoRecorrencia" class="label">
+        <span class="label-text">Tipo de recorrencia</span>
+      </label>
+      <div class="flex items-center gap-2">
+        <select id="tipoRecorrencia" name="tipoRecorrencia" class="select select-bordered w-full" required>
+          <option value="" disabled selected>Selecione</option>
+          <option value="dUteis">Dias úteis</option>
+          <option value="diaria">Diária</option>
+          <option value="semanal">Semanal</option>
+          <option value="mensal">Mensal</option>
+          <option value="anual">Anual</option>
+        </select>
+      </div>
     </div>
-  </div>
 
-  <div class="form-control">
-    <label for="diaOcorrencia" class="label">
-      <span class="label-text">Dia da ocorrência</span>
-    </label>
-    <div class="flex items-center gap-2">
-      <input 
-        type="number" 
-        id="diaOcorrencia" 
-        name="diaOcorrencia" 
-        class="input input-bordered w-full">
+    <div class="form-control">
+      <label for="diaOcorrencia" class="label">
+        <span class="label-text">Dia da ocorrência</span>
+      </label>
+      <div class="flex items-center gap-2">
+        <input 
+          type="number" 
+          id="diaOcorrencia" 
+          name="diaOcorrencia" 
+          class="input input-bordered w-full">
+      </div>
     </div>
-  </div>
+  {/if}
   <button type="submit" class="btn btn-primary w-full mt-4">Cadastrar Transação</button>
 </form>
