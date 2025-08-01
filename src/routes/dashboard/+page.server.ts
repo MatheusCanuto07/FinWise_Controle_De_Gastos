@@ -4,5 +4,5 @@ import type { PageServerLoad } from './$types';
 
 export const load = (async () => {
     
-  return redirect(303, "/dashboard/entradas");
+  return redirect(303, "/dashboard/transacoes");
 }) satisfies PageServerLoad;

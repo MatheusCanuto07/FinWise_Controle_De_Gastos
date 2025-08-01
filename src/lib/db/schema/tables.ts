@@ -55,7 +55,10 @@ export const usuarioTable = sqliteTable('user', {
 export type TransactionSelect = typeof transactionTable.$inferSelect;
 export type TransactionInsert = typeof transactionTable.$inferInsert;
 
-export type CartaoSelect = typeof cartaoTable.$inferSelect;
+export type CartaoSelect = 
+  typeof cartaoTable.$inferSelect & {
+    saldo: number;
+};
 export type CartaoInsert = typeof cartaoTable.$inferInsert;
 
 export type CategoriaSelect = typeof categoriaTable.$inferSelect;

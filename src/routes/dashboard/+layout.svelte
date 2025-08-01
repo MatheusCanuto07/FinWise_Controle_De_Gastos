@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import type { PageData } from './$types';
+	import type { PageData, LayoutData } from './$types';
 	import { page } from '$app/state';
 	import SelectPeriod from '$lib/components/SelectPeriod.svelte';
 
@@ -8,8 +8,8 @@
 		return page.url.pathname.startsWith(href);
 	}
  
-	let { data, children }: { data: PageData; children: Snippet } = $props();
-  let { saldo, gastosPrevistos } = data;
+	let { data, children }: { data: LayoutData; children: Snippet } = $props();
+  let { cartoesComSaldo } = data;
 </script>
 
 <div>
@@ -17,51 +17,28 @@
     <div class="card bg-base-200 w-64">
       <div class="card-body p-4">
         <h3 class="font-semibold">Saldo Total Disponível</h3>
-        <p class="text-3xl font-bold">{(saldo / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
-        <select class="select select-bordered select-sm w-full mb-2 mt-2">
-          <option selected>Cartão Principal</option>
-          <option>Cartão de Crédito</option>
-          <option>Conta Poupança</option>
-        </select>
+        <p class="text-3xl font-bold">{(0 / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
       </div>
     </div>
-    <div class="card bg-base-200 w-64">
-      <div class="card-body p-4">
-        <h3 class="font-semibold">Gastos previstos</h3>
-        <p class="text-3xl font-bold">{gastosPrevistos}</p>
-        <select class="select select-bordered select-sm w-full mb-2 mt-2">
-          <option selected>Cartão Principal</option>
-          <option>Cartão de Crédito</option>
-          <option>Conta Poupança</option>
-        </select>
+    {#each cartoesComSaldo as c}
+      <div class="card bg-base-200 w-64">
+        <div class="card-body p-4">
+          <h3 class="font-semibold">{c.nome}</h3>
+          <p class="text-3xl font-bold">{(c.saldo / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+        </div>
       </div>
-    </div>
-    <div class="card bg-base-200 w-64">
-      <div class="card-body p-4">
-        <h3 class="font-semibold">Cartão de crédito</h3>
-        <p class="text-3xl font-bold">R$ 4.850,75</p>
-        <select class="select select-bordered select-sm w-full mb-2 mt-2">
-          <option selected>Cartão Principal</option>
-          <option>Cartão de Crédito</option>
-          <option>Conta Poupança</option>
-        </select>
-      </div>
-    </div>
-    <div class="card bg-base-200 w-64">
-      <div class="card-body p-4">
-        <h3 class="font-semibold">Vale refeição</h3>
-        <p class="text-3xl font-bold">R$ 4.850,75</p>
-        <select class="select select-bordered select-sm w-full mb-2 mt-2">
-          <option selected>Cartão Principal</option>
-          <option>Cartão de Crédito</option>
-          <option>Conta Poupança</option>
-        </select>
-      </div>
-    </div>
+    {/each}
   </div>
 
 	<div role="tablist" class="tabs tabs-bordered">
 		<a
+			href="/dashboard/transacoes"
+			role="tab"
+			class="tab"
+			class:tab-active={isActive('/dashboard/transacoes')}>
+      Transações
+    </a>
+    <a
 			href="/dashboard/entradas"
 			role="tab"
 			class="tab"

@@ -1,31 +1,24 @@
 import type { LayoutServerLoad } from './$types';
-import {selectTransactions} from "$lib/db/Controller";
+import {getCartoes, selectTransactions, getSaldoByCard} from "$lib/db/Controller";
+import { dataParaTimestamp } from '$lib/utils/functions';
+import type {CartaoSelect} from "$lib/db/schema/tables";
 
 export const load = (async ({url}) => {
-  const startDate = new Date();
-  startDate.setDate(startDate.getDate() - 30);
-  const endDate = new Date();
-  const transactions = await selectTransactions(startDate, endDate);
+  let cartoes = await getCartoes(1);
+  let date = new Date();
+  let primeiroDia = dataParaTimestamp(new Date(date.getFullYear(), date.getMonth(), 1));
+  let ultimoDia = dataParaTimestamp(new Date(date.getFullYear(), date.getMonth() + 1, 0));
   
-  let saldo = 0;
-  transactions.forEach((t) => {
-    if(t.tipo == "entrada"){
-      saldo += t.valor
-    } else{
-      saldo -= t.valor
-    }
-  });
-
-  let gastosPrevistos = 0;
-  transactions.forEach((t) => {
-    if(t.tipo == "saida"){
-      saldo += t.valor
-    }
-  });
+  let cartoesComSaldo : CartaoSelect[] = [];
+  for (let index = 0; index < cartoes.length; index++) {
+    cartoesComSaldo.push({
+      ...cartoes[index],
+      saldo : (await getSaldoByCard(1, cartoes[index].id, primeiroDia, ultimoDia)).result
+    });    
+  }
 
   return {
-    transactions,
-    saldo,
-    gastosPrevistos
+    cartoes,
+    cartoesComSaldo
   };
 }) satisfies LayoutServerLoad;

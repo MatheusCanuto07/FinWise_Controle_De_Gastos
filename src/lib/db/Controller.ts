@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { relations, eq, and, like, desc, count, gte, lte, asc, sql } from 'drizzle-orm';
+import { relations, eq, and, like, desc, count, gte, lte, asc, sql, sum } from 'drizzle-orm';
 import {
   transactionTable,
   cartaoTable,
@@ -242,6 +242,29 @@ async function getLastThreeLembretes(idUser : number){
   }
 }
 
+async function getSaldoByCard(idUser : number, idCard : number, startDate : number, endDate : number){
+  try{
+    const [result] = await db
+      .select({
+        value : sum(transactionTable.valor)
+      })
+      .from(transactionTable)
+      .where(
+        and(
+          eq(transactionTable.idUser, idUser),
+          eq(transactionTable.idCartao, idCard),
+          gte(transactionTable.data, startDate),
+          lte(transactionTable.data, endDate)
+        )
+      )
+      .execute();
+    return {result : parseInt(result.value || "0")};
+  } catch(error){
+    console.error('Erro ao buscar saldo:', error);
+    throw error;
+  }
+}
+
 export {
   insertTransaction,
   selectTransactions,
@@ -253,5 +276,6 @@ export {
   getCartoes,
   createLembrete,
   getLembretes,
-  getLastThreeLembretes
+  getLastThreeLembretes,
+  getSaldoByCard
 } 
