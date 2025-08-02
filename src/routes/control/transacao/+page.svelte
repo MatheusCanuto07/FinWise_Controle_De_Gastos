@@ -1,11 +1,10 @@
 <script lang="ts">
   import type { PageData } from './$types';
+  import { getTipoCartao } from '$lib/utils/functions';
   let { data }: { data: PageData } = $props();
   let categorias = data.categorias;
   let cartoes = data.cartoes;
-  
-  
-  
+   
   function validaValor(){
     const moneyRegex = /^\d+(?:[.,]\d{0,2})?$/;
     if (!moneyRegex.test(valor)) {
@@ -17,13 +16,14 @@
   var mes = ("0" + (agora.getMonth() + 1)).slice(-2);
   var dia = ("0" + agora.getDate()).slice(-2);
   var dataHoje = agora.getFullYear()+"-"+(mes)+"-"+(dia);
-
   let valor = $state("0");
   let date = $state(dataHoje);
   let recorrencia = $state(false);
+  let tipo = $state();
+  let selectedCartao = $state();
 </script>
 
-<form action="?/insert" class="max-w-md mx-auto p-6 bg-base-200 rounded-lg shadow-md space-y-4">
+<form action="?/insert" method="POST" class="max-w-md mx-auto p-6 bg-base-200 rounded-lg shadow-md space-y-4">
   <h2 class="text-xl font-bold text-center">Cadastrar uma nova transação</h2>
 
   <div class="form-control">
@@ -60,6 +60,7 @@
     <label for="idCategoria" class="label">
       <span class="label-text">Categoria</span>
     </label>
+    <input type="hidden" name="tipo" value={tipo}>
     <select id="idCategoria" name="idCategoria" class="select select-bordered w-full" required>
       <option value="" disabled selected>Selecione</option>
       {#each categorias as c}
@@ -72,22 +73,16 @@
     <label for="idCartao" class="label">
       <span class="label-text">Cartão</span>
     </label>
-    <select id="idCartao" name="idCartao" class="select select-bordered w-full" required>
+    <select 
+      bind:value={selectedCartao}
+      id="idCartao"
+      name="idCartao"
+      class="select select-bordered w-full"
+      required>
       <option value="" disabled selected>Selecione</option>
       {#each cartoes as c}
-        <option value="{c.id}">{c.nome + " - " + c.tipo}</option>
+        <option value="{c.id}">{c.nome + " - " + getTipoCartao(c.tipo)}</option>
       {/each}
-    </select>
-  </div>
-
-  <div class="form-control">
-    <label for="meio" class="label">
-      <span class="label-text">Meio de Pagamento</span>
-    </label>
-    <select id="meio" name="meio" class="select select-bordered w-full" required>
-      <option value="" disabled selected>Selecione</option>
-      <option value="credito">Crédito</option>
-      <option value="debito">Débito</option>
     </select>
   </div>
 

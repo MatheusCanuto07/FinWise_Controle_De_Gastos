@@ -1,5 +1,6 @@
 import { db } from "./db";
 import { relations, eq, and, like, desc, count, gte, lte, asc, sql, sum } from 'drizzle-orm';
+import { dataParaTimestamp } from '$lib/utils/functions';
 import {
   transactionTable,
   cartaoTable,
@@ -82,10 +83,12 @@ async function insertTransaction (transaction : TransactionInsert) : Promise<{ i
   return { id: 0 };
 }
 
-async function selectTransactions(startDate: Date, endDate: Date) {
+async function selectTransactions(startDate: Date, endDate: Date, idUser : number) {
   try {
-    const startTimestamp = startDate.getTime();
-    const endTimestamp = endDate.getTime();
+    const startTimestamp = dataParaTimestamp(startDate);
+    const endTimestamp = dataParaTimestamp(endDate);
+    let teste = new Date(1754006400000);
+    console.log(startDate, teste, endDate);
 
     if (isNaN(startTimestamp) || isNaN(endTimestamp)) {
       throw new Error('Datas inválidas fornecidas');
@@ -96,6 +99,7 @@ async function selectTransactions(startDate: Date, endDate: Date) {
       .from(transactionTable)
       .where(
         and(
+          eq(transactionTable.idUser, idUser),
           gte(transactionTable.data, startTimestamp),
           lte(transactionTable.data, endTimestamp)
         )
@@ -171,6 +175,20 @@ async function createCartao(cartao : CartaoInsert) {
     console.error('Erro ao inserir insumo:', error);
   }
   return { id: 0 };
+}
+
+async function getCartaoById(id : number , idUser : number){
+  try{
+    const [result] = await db
+      .select()
+      .from(cartaoTable)
+      .where(and(eq(cartaoTable.id, id), eq(cartaoTable.idUser, idUser)))
+      .execute();
+    return result;
+  } catch(error){
+    console.error('Erro ao buscar cartão:', error);
+    throw error;
+  }
 }
 
 async function getCartoes(idUser : number){
@@ -277,5 +295,6 @@ export {
   createLembrete,
   getLembretes,
   getLastThreeLembretes,
-  getSaldoByCard
+  getSaldoByCard,
+  getCartaoById
 } 

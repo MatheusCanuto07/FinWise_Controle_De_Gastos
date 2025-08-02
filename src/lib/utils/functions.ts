@@ -4,7 +4,8 @@
  * @returns {number} Timestamp em milissegundos
  */
 export function dataParaTimestamp(data: Date): number {
-    return data.getTime();
+  const dataSemHora = new Date(data.getFullYear(), data.getMonth(), data.getDate());
+  return dataSemHora.getTime();
 }
 
 /**
@@ -14,4 +15,8 @@ export function dataParaTimestamp(data: Date): number {
  */
 export function timestampParaData(timestamp: number): Date {
     return new Date(timestamp);
+}
+
+export function getTipoCartao(tipo : string){
+  return tipo == "1" ? "Crédito" : "Débito";
 }

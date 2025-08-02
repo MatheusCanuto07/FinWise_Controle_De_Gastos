@@ -1,8 +1,8 @@
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
-import {insertTransaction, getCategorias, getCartoes} from "$lib/db/Controller";
+import {insertTransaction, getCategorias, getCartoes, getCartaoById} from "$lib/db/Controller";
 import type { TransactionInsert } from '$lib/db/schema/tables';
-import {dataParaTimestamp, timestampParaData} from '$lib/utils/functions';
+import {dataParaTimestamp, getTipoCartao, timestampParaData} from '$lib/utils/functions';
 
 export const load = (async () => {
   let categorias = await getCategorias(1);
@@ -21,19 +21,22 @@ export const actions = {
     const idCategoria = dataForm.get('idCategoria')?.toString() || ""
     const idCartao = dataForm.get('idCartao')?.toString() || ""
     const meio = dataForm.get('meio')?.toString() || ""
-    const tipo= dataForm.get('tipo')?.toString() || ""
+    const tipo = (await getCartaoById(1, parseInt(idCartao)));
     const recorrencia = dataForm.get('recorrencia')?.toString() || ""
 
     let transactionInsert : TransactionInsert ={
       idUser : 1,
-      valor : parseInt(valor ?? "0") / 100,
+      valor : parseInt(valor ?? "0") * 100,
       data : dataParaTimestamp(new Date(data)),
       idCategoria : parseInt(idCategoria ?? "0"),
       idCartao : parseInt(idCartao ?? "0"),
       meio : meio,
-      tipo : tipo,
+      tipo: tipo.tipo,
       recorrencia : recorrencia
     }
+
+    console.log(transactionInsert);
+    return;
     try{
       const id = await insertTransaction(transactionInsert);
       return {success: true}
