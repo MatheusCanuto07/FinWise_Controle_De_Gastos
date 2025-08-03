@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { dataParaTimestamp } from '$lib/utils/functions';
-import {getCartoes, selectTransactions, getSaldoByCard} from "$lib/db/Controller";
+import {selectTransactions} from "$lib/db/DAO/Transacao";
 
 export const load = (async () => {
   let date = new Date();

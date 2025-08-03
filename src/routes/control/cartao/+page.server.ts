@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
-import { createCartao, getCartoes } from '$lib/db/Controller';
+import { createCartao, getCartoes } from '$lib/db/DAO/Cartoes';
 import { dataParaTimestamp } from '$lib/utils/functions';
 
 export const load = (async () => {

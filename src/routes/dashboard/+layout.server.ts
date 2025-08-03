@@ -1,5 +1,11 @@
 import type { LayoutServerLoad } from './$types';
-import {getCartoes, selectTransactions, getSaldoByCard} from "$lib/db/Controller";
+import {
+  selectTransactions, 
+} from "$lib/db/DAO/Transacao";
+import {
+  getCartoes,
+  getSaldoByCard
+} from "$lib/db/DAO/Cartoes";
 import { dataParaTimestamp } from '$lib/utils/functions';
 import type {CartaoSelect} from "$lib/db/schema/tables";
 

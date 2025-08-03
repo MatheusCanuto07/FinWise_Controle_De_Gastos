@@ -25,7 +25,6 @@
 
 <form action="?/insert" method="POST" class="max-w-md mx-auto p-6 bg-base-200 rounded-lg shadow-md space-y-4">
   <h2 class="text-xl font-bold text-center">Cadastrar uma nova transação</h2>
-
   <div class="form-control">
     <label for="valor" class="label">
       <span class="label-text">Valor</span>

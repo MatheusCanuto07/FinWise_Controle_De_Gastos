@@ -1,6 +1,15 @@
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
-import {insertTransaction, getCategorias, getCartoes, getCartaoById} from "$lib/db/Controller";
+import { 
+  insertTransaction,
+} from "$lib/db/DAO/Transacao";
+import {
+  getCategorias
+} from "$lib/db/DAO/Categorias";
+import {
+  getCartoes,
+  getCartaoById
+} from "$lib/db/DAO/Cartoes";
 import type { TransactionInsert } from '$lib/db/schema/tables';
 import {dataParaTimestamp, getTipoCartao, timestampParaData} from '$lib/utils/functions';
 
@@ -35,8 +44,6 @@ export const actions = {
       recorrencia : recorrencia
     }
 
-    console.log(transactionInsert);
-    return;
     try{
       const id = await insertTransaction(transactionInsert);
       return {success: true}

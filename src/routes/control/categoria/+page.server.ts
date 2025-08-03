@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
 import type { CategoriaInsert } from '$lib/db/schema/tables';
-import { createCategory, getCategorias } from '$lib/db/Controller';
+import { createCategory, getCategorias } from '$lib/db/DAO/Categorias';
 
 export const load = (async () => {
   let categorias = await getCategorias(1);

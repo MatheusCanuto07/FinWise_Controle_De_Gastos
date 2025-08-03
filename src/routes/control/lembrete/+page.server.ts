@@ -1,4 +1,4 @@
-import { createLembrete } from '$lib/db/Controller';
+import { createLembrete } from '$lib/db/DAO/Lembrete';
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
 
