@@ -102,7 +102,7 @@
   </div>
   {#if recorrencia}
     <div class="form-control">
-      <label for="tempoRecorrencia" class="label">
+      <label for="tempoRecorrencia" class="label"> 
         <span class="label-text">Quantas vezes essa transação vai acontecer</span>
       </label>
       <div class="flex items-center gap-2">
