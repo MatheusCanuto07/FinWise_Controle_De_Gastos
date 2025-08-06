@@ -13,8 +13,6 @@
     })
   })
 
-  $inspect(selectedPeriod)
-
 </script>
 
 <select onchange={mudaUrl} class="select select-bordered w-full mt-2 mb-2" bind:value={selectedPeriod}>

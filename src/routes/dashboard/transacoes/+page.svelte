@@ -1,11 +1,52 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  let { data }: { data: PageData} = $props(); 
-  let {transactions} = data;
+  let { data }: { data: PageData} = $props();
+  let transactions = [
+    {
+      id : 1,
+      tipo : "receita",
+      meio: "Cartão de crédito",
+      recorrencia : "Sim",
+      data : new Date(),
+      valor: 123132
+    },
+    {
+      id : 2,
+      tipo : "receita",
+      meio: "Cartão de crédito",
+      recorrencia : "Sim",
+      data : new Date(),
+      valor: 123132
+    },
+    {
+      id : 3,
+      tipo : "receita",
+      meio: "Receita",
+      recorrencia : "Receita",
+      data : new Date("August 05, 2025 03:24:00"),
+      valor: 33111
+    },
+    {
+      id : 4,
+      tipo : "receita",
+      meio: "Receita",
+      recorrencia : "Receita",
+      data : new Date("August 03, 2025 03:24:00"),
+      valor: 33111
+    }
+  ]
+  function toggleDataValue(dTAnt : number) {
+    dataTransacaoAnterior = dTAnt
+  }
+  let dataTransacaoAnterior : number;
 </script>
 
 <div class="space-y-3">
   {#each transactions as t (t.id)}
+    {#if dataTransacaoAnterior !== t.data.getDate()}
+      <div class="divider">{Intl.DateTimeFormat('pt-BR').format(t.data)}</div>
+    {/if}
+    {toggleDataValue(t.data.getDate())}
     <div class="flex justify-between items-center p-3 bg-base-100 rounded-lg shadow-sm hover:bg-base-200 transition-colors">
       <div class="flex items-center gap-3">
         {#if t.tipo === 'receita'}

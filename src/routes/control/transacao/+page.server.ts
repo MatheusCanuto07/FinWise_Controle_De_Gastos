@@ -1,24 +1,24 @@
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
-import { 
-  insertTransaction,
-} from "$lib/db/DAO/Transacao";
-import {
-  getCategorias
-} from "$lib/db/DAO/Categorias";
-import {
-  getCartoes,
-  getCartaoById
-} from "$lib/db/DAO/Cartoes";
+// import { 
+//   insertTransaction,
+// } from "$lib/db/DAO/Transacao";
+// import {
+//   getCategorias
+// } from "$lib/db/DAO/Categorias";
+// import {
+//   getCartoes,
+//   getCartaoById
+// } from "$lib/db/DAO/Cartoes";
 import type { TransactionInsert } from '$lib/db/schema/tables';
 import {dataParaTimestamp, getTipoCartao, timestampParaData} from '$lib/utils/functions';
 
 export const load = (async () => {
-  let categorias = await getCategorias(1);
-  let cartoes = await getCartoes(1);
+  // let categorias = await getCategorias(1);
+  // let cartoes = await getCartoes(1);
   return {
-    categorias,
-    cartoes
+    // categorias,
+    // cartoes
   };
 }) satisfies PageServerLoad;
 
@@ -30,22 +30,22 @@ export const actions = {
     const idCategoria = dataForm.get('idCategoria')?.toString() || ""
     const idCartao = dataForm.get('idCartao')?.toString() || ""
     const meio = dataForm.get('meio')?.toString() || ""
-    const tipo = (await getCartaoById(1, parseInt(idCartao)));
+    //const tipo = (await getCartaoById(1, parseInt(idCartao)));
     const recorrencia = dataForm.get('recorrencia')?.toString() || ""
 
-    let transactionInsert : TransactionInsert ={
-      idUser : 1,
-      valor : parseInt(valor ?? "0") * 100,
-      data : dataParaTimestamp(new Date(data)),
-      idCategoria : parseInt(idCategoria ?? "0"),
-      idCartao : parseInt(idCartao ?? "0"),
-      meio : meio,
-      tipo: tipo.tipo,
-      recorrencia : recorrencia
-    }
+    // let transactionInsert : TransactionInsert ={
+    //   idUser : 1,
+    //   valor : parseInt(valor ?? "0") * 100,
+    //   data : dataParaTimestamp(new Date(data)),
+    //   idCategoria : parseInt(idCategoria ?? "0"),
+    //   idCartao : parseInt(idCartao ?? "0"),
+    //   meio : meio,
+    //   // tipo: tipo.tipo,
+    //   recorrencia : recorrencia
+    // }
 
     try{
-      const id = await insertTransaction(transactionInsert);
+      // const id = await insertTransaction(transactionInsert);
       return {success: true}
     }
     catch(error){

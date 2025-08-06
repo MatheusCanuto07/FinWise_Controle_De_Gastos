@@ -91,6 +91,7 @@
     </label>
     <div class="flex items-center gap-2">
       <input 
+              checked={recorrencia}
         value={recorrencia}
         type="checkbox" 
         id="recorrencia" 

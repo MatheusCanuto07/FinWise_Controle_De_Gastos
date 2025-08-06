@@ -1,33 +1,56 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
-	import type { PageData, LayoutData } from './$types';
-	import { page } from '$app/state';
-	import SelectPeriod from '$lib/components/SelectPeriod.svelte';
-
-	function isActive(href: string) {
-		return page.url.pathname.startsWith(href);
-	}
- 
-	let { data, children }: { data: LayoutData; children: Snippet } = $props();
-  let { cartoesComSaldo } = data;
+    import type { Snippet } from 'svelte';
+    import type { PageData, LayoutData } from './$types';
+    import { page } from '$app/state';
+    import SelectPeriod from '$lib/components/SelectPeriod.svelte';
+    
+    function isActive(href: string) {
+        return page.url.pathname.startsWith(href);
+    }
+    
+    let { data, children }: { data: LayoutData; children: Snippet } = $props();
+    let cartoesComSaldo = [
+      {
+        nome : "Débido Nu Bank",
+        saldo : 1234111,
+      },
+      {
+        nome : "Vale Refeição",
+        saldo : 1234111,
+      },
+      {
+        nome : "Cartão de crédito (Nu Bank)",
+        saldo : 123321,
+      },
+      {
+        nome: "Cartão Polo",
+        saldo : 112312,
+      }
+    ]
 </script>
 
 <div>
   <div class="w-full flex justify-center gap-4">
-    <div class="card bg-base-200 w-64">
-      <div class="card-body p-4">
-        <h3 class="font-semibold">Saldo Total Disponível</h3>
-        <p class="text-3xl font-bold">{(0 / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+      <div class="carousel rounded-box">
+          <div class="carousel-item">
+              <div class="card bg-base-200 w-64 ml-3">
+                  <div class="card-body p-4">
+                      <h3 class="font-semibold">Saldo Total Disponível</h3>
+                      <p class="text-3xl font-bold">{(0 / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                  </div>
+              </div>
+          </div>
+          {#each cartoesComSaldo as c}
+              <div class="carousel-item">
+                  <div class="card bg-base-200 w-64 ml-3">
+                      <div class="card-body p-4">
+                          <h3 class="font-semibold">{c.nome}</h3>
+                          <p class="text-3xl font-bold">{(c.saldo / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                      </div>
+                  </div>
+              </div>
+            {/each}
       </div>
-    </div>
-    {#each cartoesComSaldo as c}
-      <div class="card bg-base-200 w-64">
-        <div class="card-body p-4">
-          <h3 class="font-semibold">{c.nome}</h3>
-          <p class="text-3xl font-bold">{(c.saldo / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
-        </div>
-      </div>
-    {/each}
   </div>
 
 	<div role="tablist" class="tabs tabs-bordered">
