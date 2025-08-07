@@ -4,6 +4,7 @@ export {
   categoriaTable,
   usuarioTable
 } from './tables';
+
 export type {
   TransactionSelect,
   TransactionInsert,

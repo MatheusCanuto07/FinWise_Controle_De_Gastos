@@ -2,8 +2,8 @@
   import type { PageData } from './$types';
   import { getTipoCartao } from '$lib/utils/functions';
   let { data }: { data: PageData } = $props();
-  let categorias = data.categorias;
-  let cartoes = data.cartoes;
+  // let categorias = data.categorias;
+  // let cartoes = data.cartoes;
    
   function validaValor(){
     const moneyRegex = /^\d+(?:[.,]\d{0,2})?$/;
@@ -19,6 +19,8 @@
   let valor = $state("0");
   let date = $state(dataHoje);
   let recorrencia = $state(false);
+  let tipoRecorrencia = $state("");
+  let quantRecorrencia = $state(0);
   let tipo = $state();
   let selectedCartao = $state();
 </script>
@@ -62,9 +64,9 @@
     <input type="hidden" name="tipo" value={tipo}>
     <select id="idCategoria" name="idCategoria" class="select select-bordered w-full" required>
       <option value="" disabled selected>Selecione</option>
-      {#each categorias as c}
-         <option value="{c.id}">{c.nome}</option>
-      {/each}
+      <!--{#each categorias as c}-->
+      <!--   <option value="{c.id}">{c.nome}</option>-->
+      <!--{/each}-->
     </select>
   </div>
 
@@ -79,9 +81,9 @@
       class="select select-bordered w-full"
       required>
       <option value="" disabled selected>Selecione</option>
-      {#each cartoes as c}
-        <option value="{c.id}">{c.nome + " - " + getTipoCartao(c.tipo)}</option>
-      {/each}
+      <!--{#each cartoes as c}-->
+      <!--  <option value="{c.id}">{c.nome + " - " + getTipoCartao(c.tipo)}</option>-->
+      <!--{/each}-->
     </select>
   </div>
 
@@ -91,7 +93,7 @@
     </label>
     <div class="flex items-center gap-2">
       <input 
-              checked={recorrencia}
+        bind:checked={recorrencia}
         value={recorrencia}
         type="checkbox" 
         id="recorrencia" 
@@ -102,24 +104,11 @@
   </div>
   {#if recorrencia}
     <div class="form-control">
-      <label for="tempoRecorrencia" class="label"> 
-        <span class="label-text">Quantas vezes essa transação vai acontecer</span>
-      </label>
-      <div class="flex items-center gap-2">
-        <input 
-          type="number" 
-          id="tempoRecorrencia" 
-          name="tempoRecorrencia" 
-          class="input input-bordered w-full">
-      </div>
-    </div>
-
-    <div class="form-control">
       <label for="tipoRecorrencia" class="label">
         <span class="label-text">Tipo de recorrencia</span>
       </label>
       <div class="flex items-center gap-2">
-        <select id="tipoRecorrencia" name="tipoRecorrencia" class="select select-bordered w-full" required>
+        <select bind:value={tipoRecorrencia} id="tipoRecorrencia" name="tipoRecorrencia" class="select select-bordered w-full" required>
           <option value="" disabled selected>Selecione</option>
           <option value="dUteis">Dias úteis</option>
           <option value="diaria">Diária</option>
@@ -129,19 +118,47 @@
         </select>
       </div>
     </div>
-
     <div class="form-control">
-      <label for="diaOcorrencia" class="label">
-        <span class="label-text">Dia da ocorrência</span>
+      <label for="quantOcorrencia" class="label">
+        <span class="label-text">Quantas vezes essa transação vai acontecer</span>
       </label>
       <div class="flex items-center gap-2">
-        <input 
-          type="number" 
-          id="diaOcorrencia" 
-          name="diaOcorrencia" 
-          class="input input-bordered w-full">
+        <input
+          type="number"
+          id="quantOcorrencia"
+          name="quantOcorrencia"
+          class="input input-bordered w-full"
+          bind:value={quantRecorrencia}>
       </div>
     </div>
+    {#if tipoRecorrencia == "dUteis"}
+      <p>Vão ser criadas {quantRecorrencia} transacoes em dias úteis</p>
+    {/if}
+    {#if tipoRecorrencia == "diaria"}
+      <p>Vão ser criadas {quantRecorrencia} transações em dias corridos contando hoje</p>
+    {/if}
+    {#if tipoRecorrencia == "semanal"}
+      <label for="diaOcorrenciaSemanal">Selecione o dia da semana</label>
+      <select name="diaOcorrenciaSemanal" id="diaOcorrenciaSemanal" class="select select-bordered w-full" required>
+        <option value="" disabled selected>Selecione</option>
+        <option value="domingo">Domingo</option>
+        <option value="segunda">Segunda-feira</option>
+        <option value="terca">Terça-feira</option>
+        <option value="quarta">Quarta-feira</option>
+        <option value="quinta">Quinta-feira</option>
+        <option value="sexta">Sexta-feira</option>
+        <option value="sabado">Sabado</option>
+      </select>
+    {/if}
+    {#if tipoRecorrencia == "mensal"}
+      <label for="diaOcorrenciaMes">Selecione o dia do mês</label>
+<!--      todo: Tratar esse limite de data no back-end-->
+      <input type="number" name="diaOcorrenciaMes" id="diaOcorrenciaMes" placeholder="Selecione o dia mes" min="0" max="31"/>
+    {/if}
+    {#if tipoRecorrencia == "anual"}
+      <label for="diaOcorrenciaAno">Selecione o dia do ano</label>
+      <input type="date" name="diaOcorrenciaAno" id="diaOcorrenciaAno" placeholder="Selecione o dia do ano" />
+    {/if}
   {/if}
   <button type="submit" class="btn btn-primary w-full mt-4">Cadastrar Transação</button>
 </form>
