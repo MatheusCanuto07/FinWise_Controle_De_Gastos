@@ -36,7 +36,7 @@
       <span class="label-text">Valor</span>
     </label>
     <input 
-      type="text" 
+      type="text"
       id="valor" 
       name="valor"
       class="input input-bordered w-full" 
