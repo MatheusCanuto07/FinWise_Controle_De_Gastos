@@ -75,8 +75,8 @@ export async function selectTransactions(startDate: Date, endDate: Date, idUser 
   try {
     const startTimestamp = dataParaTimestamp(startDate);
     const endTimestamp = dataParaTimestamp(endDate);
+    console.log(startTimestamp, endTimestamp);
     let teste = new Date(1754006400000);
-    console.log(startDate, teste, endDate);
 
     if (isNaN(startTimestamp) || isNaN(endTimestamp)) {
       throw new Error('Datas INVÁLIDAS fornecidas');
@@ -94,7 +94,6 @@ export async function selectTransactions(startDate: Date, endDate: Date, idUser 
       )
       .orderBy(asc(transactionTable.id))
       .execute();
-    
     return result;
   } catch (error) {
     console.error('Erro na consulta:', error);

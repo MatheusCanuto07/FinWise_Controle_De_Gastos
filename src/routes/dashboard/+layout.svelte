@@ -9,24 +9,7 @@
     }
     
     let { data, children }: { data: LayoutData; children: Snippet } = $props();
-    let cartoesComSaldo = [
-      {
-        nome : "Débido Nu Bank",
-        saldo : 1234111,
-      },
-      {
-        nome : "Vale Refeição",
-        saldo : 1234111,
-      },
-      {
-        nome : "Cartão de crédito (Nu Bank)",
-        saldo : 123321,
-      },
-      {
-        nome: "Cartão Polo",
-        saldo : 112312,
-      }
-    ]
+    let {cartoesComSaldo} = data;
 </script>
 
 <div>

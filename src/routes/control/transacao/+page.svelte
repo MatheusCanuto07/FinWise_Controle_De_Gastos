@@ -2,8 +2,7 @@
   import type { PageData } from './$types';
   import { getTipoCartao } from '$lib/utils/functions';
   let { data }: { data: PageData } = $props();
-  // let categorias = data.categorias;
-  // let cartoes = data.cartoes;
+  let {categorias, cartoes} = data;
    
   function validaValor(){
     const moneyRegex = /^\d+(?:[.,]\d{0,2})?$/;
@@ -42,7 +41,17 @@
       required
     />
   </div>
-
+  
+  <div class="form-control">
+    <label for="tipo" class="label">
+      <span class="label-text">Tipo</span>
+    </label>
+    <select name="tipo" id="tipo" class="select select-bordered w-full">
+      <option value="entrada" >Entrada</option>
+      <option value="saida" selected>Saída</option>
+    </select>
+  </div>
+  
   <div class="form-control">
     <label for="data" class="label">
       <span class="label-text">Data</span>
@@ -64,15 +73,15 @@
     <input type="hidden" name="tipo" value={tipo}>
     <select id="idCategoria" name="idCategoria" class="select select-bordered w-full" required>
       <option value="" disabled selected>Selecione</option>
-      <!--{#each categorias as c}-->
-      <!--   <option value="{c.id}">{c.nome}</option>-->
-      <!--{/each}-->
+      {#each categorias as c}
+         <option value="{c.id}">{c.nome}</option>
+      {/each}
     </select>
   </div>
 
   <div class="form-control">
     <label for="idCartao" class="label">
-      <span class="label-text">Cartão</span>
+      <span class="label-text">Forma de pagamento</span>
     </label>
     <select 
       bind:value={selectedCartao}
@@ -81,9 +90,10 @@
       class="select select-bordered w-full"
       required>
       <option value="" disabled selected>Selecione</option>
-      <!--{#each cartoes as c}-->
-      <!--  <option value="{c.id}">{c.nome + " - " + getTipoCartao(c.tipo)}</option>-->
-      <!--{/each}-->
+      <option value="dinheiro">Dinheiro</option>
+      {#each cartoes as c}
+        <option value="{c.id}">{c.nome + " - " + getTipoCartao(c.tipo)}</option>
+      {/each}
     </select>
   </div>
 
