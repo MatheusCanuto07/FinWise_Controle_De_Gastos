@@ -1,6 +1,5 @@
 <script lang="ts">
 	let dialog: HTMLDialogElement | undefined = $state();
-
 	export function abrirModal() {
 		dialog?.showModal();
 	}

@@ -88,9 +88,6 @@
   </div>
 
   <div class="form-control">
-    <label for="recorrencia" class="label">
-      <span class="label-text">Recorrência</span>
-    </label>
     <div class="flex items-center gap-2">
       <input 
         bind:checked={recorrencia}

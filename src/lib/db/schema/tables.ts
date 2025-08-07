@@ -52,6 +52,23 @@ export const usuarioTable = sqliteTable('user', {
   saldo: integer('saldo').notNull()
 });
 
+export const lembreteTable = sqliteTable('lembrete', {
+  id: integer('id'),
+  idUser: integer('idUser').notNull(),
+  nome: text('name').notNull(),
+  pessoa: text('pessoa').notNull(),
+  saldo: integer('saldo').notNull()
+})
+
+export const lembreteItem = sqliteTable('lembreteItem', {
+  id: integer('id'),
+  idUser: integer('idUser').notNull(),
+  idCategoria: integer('idCategoria').notNull(),
+  idLembrete : integer('idLembrete').notNull(),
+  valor: integer('valor').notNull(),
+  descricao : text('descricao').notNull(),
+})
+
 export type TransactionSelect = typeof transactionTable.$inferSelect;
 export type TransactionInsert = typeof transactionTable.$inferInsert;
 
