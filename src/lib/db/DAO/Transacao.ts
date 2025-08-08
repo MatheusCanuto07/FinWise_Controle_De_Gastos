@@ -75,8 +75,6 @@ export async function selectTransactions(startDate: Date, endDate: Date, idUser 
   try {
     const startTimestamp = dataParaTimestamp(startDate);
     const endTimestamp = dataParaTimestamp(endDate);
-    console.log(startTimestamp, endTimestamp);
-    let teste = new Date(1754006400000);
 
     if (isNaN(startTimestamp) || isNaN(endTimestamp)) {
       throw new Error('Datas INVÁLIDAS fornecidas');
@@ -89,7 +87,36 @@ export async function selectTransactions(startDate: Date, endDate: Date, idUser 
         and(
           eq(transactionTable.idUser, idUser),
           gte(transactionTable.data, startTimestamp),
-          lte(transactionTable.data, endTimestamp)
+          lte(transactionTable.data, endTimestamp),
+        )
+      )
+      .orderBy(asc(transactionTable.id))
+      .execute();
+    return result;
+  } catch (error) {
+    console.error('Erro na consulta:', error);
+    throw new Error('Falha ao buscar transações');
+  }
+}
+
+export async function selectTransactionsWithType(startDate: Date, endDate: Date, idUser : number, tipo : string) {
+  try {
+    const startTimestamp = dataParaTimestamp(startDate);
+    const endTimestamp = dataParaTimestamp(endDate);
+
+    if (isNaN(startTimestamp) || isNaN(endTimestamp)) {
+      throw new Error('Datas INVÁLIDAS fornecidas');
+    }
+
+    const result = await db
+      .select()
+      .from(transactionTable)
+      .where(
+        and(
+          eq(transactionTable.idUser, idUser),
+          eq(transactionTable.tipo, tipo),
+          gte(transactionTable.data, startTimestamp),
+          lte(transactionTable.data, endTimestamp),
         )
       )
       .orderBy(asc(transactionTable.id))

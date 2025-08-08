@@ -43,6 +43,18 @@
   </div>
   
   <div class="form-control">
+    <label for="desc">
+      <span class="label-text">Descrição</span>
+    </label>
+    <input 
+        required
+        class="input input-bordered w-full"
+        name="desc"
+        id="desc"
+        type="text">
+  </div>
+  
+  <div class="form-control">
     <label for="tipo" class="label">
       <span class="label-text">Tipo</span>
     </label>
@@ -90,7 +102,7 @@
       class="select select-bordered w-full"
       required>
       <option value="" disabled selected>Selecione</option>
-      <option value="dinheiro">Dinheiro</option>
+      <option value="0">Dinheiro</option>
       {#each cartoes as c}
         <option value="{c.id}">{c.nome + " - " + getTipoCartao(c.tipo)}</option>
       {/each}

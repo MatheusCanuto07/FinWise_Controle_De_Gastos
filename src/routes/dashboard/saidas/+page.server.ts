@@ -7,7 +7,7 @@ export const load = (async ({params}) => {
   let primeiroDia = new Date(Date.UTC(date.getFullYear(), date.getMonth(), 1));
   let ultimoDia = new Date(Date.UTC(date.getFullYear(), date.getMonth() + 1, 0));
   
-  let transacoes = await selectTransactionsWithType(primeiroDia, ultimoDia, 1, "entrada");
+  let transacoes = await selectTransactionsWithType(primeiroDia, ultimoDia, 1, "saida");
   return {
     transacoes
   };

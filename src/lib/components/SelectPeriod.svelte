@@ -19,4 +19,4 @@
   <option selected value="lastWeek">Última semana</option>
   <option value="lastMonth">Último mês</option>
   <option value="personalizadPeriod">Período personalizado</option>
-</select>	
+</select>

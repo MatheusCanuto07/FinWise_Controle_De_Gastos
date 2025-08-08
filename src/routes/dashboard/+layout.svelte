@@ -2,7 +2,7 @@
     import type { Snippet } from 'svelte';
     import type { PageData, LayoutData } from './$types';
     import { page } from '$app/state';
-    import SelectPeriod from '$lib/components/SelectPeriod.svelte';
+    import {filters} from './params.svelte';
     
     function isActive(href: string) {
         return page.url.pathname.startsWith(href);
@@ -10,6 +10,20 @@
     
     let { data, children }: { data: LayoutData; children: Snippet } = $props();
     let {cartoesComSaldo} = data;
+    
+    filters.update({
+      period : "lastWeek"
+    })
+
+    let selectedPeriod = $state('lastWeek');
+    let period = $state(selectedPeriod);
+    $inspect(period);
+    let mudaUrl = (() => {
+      filters.update({
+        period: selectedPeriod
+      })
+      period = selectedPeriod;
+    })
 </script>
 
 <div>
@@ -38,36 +52,40 @@
 
 	<div role="tablist" class="tabs tabs-bordered">
 		<a
-			href="/dashboard/transacoes"
+			href={"/dashboard/transacoes?" + period} 
 			role="tab"
 			class="tab"
-			class:tab-active={isActive('/dashboard/transacoes')}>
+			class:tab-active={isActive('/dashboard/transacoes?' + period)}>
       Transações
     </a>
     <a
-			href="/dashboard/entradas"
+			href={"/dashboard/entradas?" + period}
 			role="tab"
 			class="tab"
-			class:tab-active={isActive('/dashboard/entradas')}>
+			class:tab-active={isActive('/dashboard/entradas?' + period)}>
       Entradas
     </a>
 		<a
-			href="/dashboard/saidas"
+			href={"/dashboard/saidas?" + period} 
 			role="tab"
 			class="tab"
-			class:tab-active={isActive('/dashboard/saidas')}>
+			class:tab-active={isActive('/dashboard/saidas?' + period)}>
       Saidas
     </a>
     <a 
-      href="/dashboard/lembretes"
+      href={"/dashboard/lembretes?" + period}
       role="tab"
       class="tab"
-      class:tab-active={isActive('/dashboard/lembretes')}>
+      class:tab-active={isActive('/dashboard/lembretes?' + period)}>
       Lembretes
     </a>
 	</div>
 
-  <SelectPeriod />
-  
-	{@render children()}
+    <select onchange={mudaUrl} class="select select-bordered w-full mt-2 mb-2" bind:value={selectedPeriod}>
+        <option selected value="lastWeek">Última semana</option>
+        <option value="lastMonth">Último mês</option>
+        <option value="personalizadPeriod">Período personalizado</option>
+    </select>
+    
+    {@render children()}
 </div>
