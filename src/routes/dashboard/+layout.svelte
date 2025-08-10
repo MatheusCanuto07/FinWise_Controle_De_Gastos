@@ -4,7 +4,9 @@
     import { page } from '$app/state';
     import {filters} from './params.svelte';
     
+    let pageActive = $state("transacoes");
     function isActive(href: string) {
+        console.log(page.url.pathname, href);
         return page.url.pathname.startsWith(href);
     }
     
@@ -17,7 +19,7 @@
 
     let selectedPeriod = $state('lastWeek');
     let period = $state(selectedPeriod);
-    $inspect(period);
+    
     let mudaUrl = (() => {
       filters.update({
         period: selectedPeriod
@@ -51,32 +53,44 @@
   </div>
 
 	<div role="tablist" class="tabs tabs-bordered">
-		<a
-			href={"/dashboard/transacoes?" + period} 
-			role="tab"
-			class="tab"
-			class:tab-active={isActive('/dashboard/transacoes?' + period)}>
+	<a
+	 href={"/dashboard/transacoes?" + period} 
+	 role="tab"
+	 class="tab"
+     onclick={() => {
+        pageActive = 'transacoes';
+     }}
+	 class:tab-active={pageActive == 'transacoes'}>
       Transações
     </a>
     <a
-			href={"/dashboard/entradas?" + period}
-			role="tab"
-			class="tab"
-			class:tab-active={isActive('/dashboard/entradas?' + period)}>
+        href={"/dashboard/entradas?" + period}
+        role="tab"
+        class="tab"
+        onclick={() => {
+          pageActive = 'entradas';
+        }}
+        class:tab-active={pageActive == 'entradas'}>
       Entradas
     </a>
-		<a
-			href={"/dashboard/saidas?" + period} 
-			role="tab"
-			class="tab"
-			class:tab-active={isActive('/dashboard/saidas?' + period)}>
+    <a
+      href={"/dashboard/saidas?" + period} 
+      role="tab"
+      class="tab"
+      onclick={() => {
+        pageActive = 'saidas';
+      }}
+      class:tab-active={pageActive == 'saidas'}>
       Saidas
     </a>
     <a 
       href={"/dashboard/lembretes?" + period}
       role="tab"
       class="tab"
-      class:tab-active={isActive('/dashboard/lembretes?' + period)}>
+      onclick={() => {
+        pageActive = 'lembretes';
+      }}
+      class:tab-active={pageActive == 'lembretes'}>
       Lembretes
     </a>
 	</div>

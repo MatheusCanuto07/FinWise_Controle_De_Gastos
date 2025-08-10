@@ -36,7 +36,8 @@ export const cartaoTable = sqliteTable('cartao', {
   idUser: integer('idUser').notNull(),
   nome: text('nome').notNull(),
   tipo: text('tipo').notNull(),
-  diaVencimento: integer('diaVencimento').notNull()
+  diaVencimento: integer('diaVencimento').notNull(),
+  saldo: integer('saldo').notNull()
 });
 
 export const categoriaTable = sqliteTable('categoria', {

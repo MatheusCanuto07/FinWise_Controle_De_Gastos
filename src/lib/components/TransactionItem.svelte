@@ -1,14 +1,37 @@
 <script>
-  let { tipo, desc, meio, data, recorrencia = 'nenhuma', valor } = $props();
+  import ModalComponent from "$lib/components/ModalComponent.svelte";
+  import {onMount} from "svelte";
+
+  let { id, tipo, desc, meio, data, recorrencia = 'nenhuma', valor } = $props();
 
   const dataFormatada = $derived(new Date(data).toLocaleDateString('pt-BR'));
   const ehReceita = $derived(tipo === 'receita');
   const ehDespesa = $derived(tipo === 'despesa');
   const sinal = $derived(ehReceita ? '+' : '-');
   const corTexto = $derived(ehReceita ? 'text-green-500' : ehDespesa ? 'text-red-500' : '');
+
+  let instance = $state()
+  function onclick() {
+      instance.abrirModal()
+  }
+  
+  async function excluirTransacao() {
+    console.log(id)
+    await fetch(`/api/transacao/${id}`, {
+      method: 'DELETE'
+    });
+  }
+
+  async function deleteTransacao() {
+    
+  }
+  onMount(() => {
+      deleteTransacao();
+  });
+  
 </script>
 
-<div class="flex justify-between items-center p-3 bg-base-100 rounded-lg shadow-sm hover:bg-base-200 transition-colors">
+<a href="#" class="flex justify-between items-center p-3 bg-base-100 rounded-lg shadow-sm hover:bg-base-200 transition-colors" {onclick}>
     <div class="flex items-center gap-3">
         {#if tipo === 'entrada'}
             <div class="text-green-500">
@@ -39,4 +62,16 @@
             {sinal} {valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
         </p>
     </div>
-</div>
+</a>
+
+{#snippet modalContent()}
+    <p class="text-center text-lg font-semibold">Tem certeza que deseja excluir essa transação?</p>
+    <div class="modal-action">
+        <form method="dialog">
+            <button class="btn btn-error w-28 rounded-lg" onclick={excluirTransacao}>Sim</button>
+            <button class="btn btn-primary w-28 rounded-lg">Close</button>
+        </form>
+    </div>
+{/snippet}
+
+<ModalComponent bind:this={instance} children={modalContent}/>

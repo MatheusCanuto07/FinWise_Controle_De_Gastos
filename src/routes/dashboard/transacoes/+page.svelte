@@ -2,7 +2,7 @@
   import type { PageData } from './$types';
   import TransactionItem from "$lib/components/TransactionItem.svelte";
   let { data }: { data: PageData} = $props();
-  let {transacoes} = data;
+  let transacoes = $derived(data.transacoes);
   function toggleDataValue(dTAnt : number) {
     dataTransacaoAnterior = dTAnt
   }
@@ -16,16 +16,18 @@
     {/if}
     {toggleDataValue(t.data)}
     <TransactionItem
-            tipo={t.tipo}
-            data="{t.data}"
-            desc="{t.desc}"
-            meio="{t.meio}"
-            recorrencia="{t.recorrencia}"
-            valor="{t.valor}"
+      id={t.id}
+      tipo={t.tipo}
+      data="{t.data}"
+      desc="{t.desc}"
+      meio="{t.meio}"
+      recorrencia="{t.recorrencia}"
+      valor="{t.valor}"
     />
-  {:else}
+  {:else} 
     <div class="text-center py-8 text-gray-500">
       Nenhuma transação encontrada
     </div>
   {/each}
 </div>
+

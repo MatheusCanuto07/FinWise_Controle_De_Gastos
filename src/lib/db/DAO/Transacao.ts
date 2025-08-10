@@ -90,7 +90,7 @@ export async function selectTransactions(startDate: Date, endDate: Date, idUser 
           lte(transactionTable.data, endTimestamp),
         )
       )
-      .orderBy(asc(transactionTable.id))
+      .orderBy(desc(transactionTable.id))
       .execute();
     return result;
   } catch (error) {
@@ -119,7 +119,7 @@ export async function selectTransactionsWithType(startDate: Date, endDate: Date,
           lte(transactionTable.data, endTimestamp),
         )
       )
-      .orderBy(asc(transactionTable.id))
+      .orderBy(desc(transactionTable.id))
       .execute();
     return result;
   } catch (error) {
@@ -128,20 +128,20 @@ export async function selectTransactionsWithType(startDate: Date, endDate: Date,
   }
 }
 
-export async function deleteTransaction(id: number) {
+export async function deleteTransaction(idUser: number, id: number) {
   try {
     const deleted = await db
       .delete(transactionTable)
       .where(
         and(
           eq(transactionTable.id, id),
-          eq(transactionTable.idOcorrencia, id)
+          eq(transactionTable.idUser, idUser)
         )
       )
       .returning({ deletedId: transactionTable.id });
 
     if (deleted.length === 0) {
-      console.warn(`Nenhuma transação encontrada com id e idOcorrencia: ${id}`);
+      console.warn(`Nenhuma transação encontrada com id: ${id}`);
       return false;
     }
 
