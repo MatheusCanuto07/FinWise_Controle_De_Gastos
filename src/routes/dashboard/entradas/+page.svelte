@@ -9,12 +9,13 @@
 <div class="mt-3">
 	{#each transacoes as t}
 		<TransactionItem 
+      id={t.id}
 			tipo={t.tipo}
-			data="{t.data}"
-			desc="{t.desc}"
-			meio="{t.meio}"
-			recorrencia="{t.recorrencia}"
-			valor="{t.valor}"
+			data={t.data}
+			desc={t.desc}
+			meio={t.meio}
+			recorrencia={t.recorrencia}
+			valor={t.valor}
 		/>
 	{/each}
 </div>

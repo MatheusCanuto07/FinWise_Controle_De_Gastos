@@ -99,7 +99,7 @@ export async function selectTransactions(startDate: Date, endDate: Date, idUser 
   }
 }
 
-export async function selectTransactionsWithType(startDate: Date, endDate: Date, idUser : number, tipo : string) {
+export async function selectTransactionsWithType(startDate: Date, endDate: Date, idUser : number, tipo : string, idCard : number = 0) {
   try {
     const startTimestamp = dataParaTimestamp(startDate);
     const endTimestamp = dataParaTimestamp(endDate);
@@ -108,19 +108,38 @@ export async function selectTransactionsWithType(startDate: Date, endDate: Date,
       throw new Error('Datas INVÁLIDAS fornecidas');
     }
 
-    const result = await db
-      .select()
-      .from(transactionTable)
-      .where(
-        and(
-          eq(transactionTable.idUser, idUser),
-          eq(transactionTable.tipo, tipo),
-          gte(transactionTable.data, startTimestamp),
-          lte(transactionTable.data, endTimestamp),
+    let result;
+    if(idCard = 0){
+      result = await db
+        .select()
+        .from(transactionTable)
+        .where(
+          and(
+            eq(transactionTable.idUser, idUser),
+            eq(transactionTable.tipo, tipo),
+            gte(transactionTable.data, startTimestamp),
+            lte(transactionTable.data, endTimestamp),
+          )
         )
-      )
-      .orderBy(desc(transactionTable.id))
-      .execute();
+        .orderBy(desc(transactionTable.id))
+        .execute();
+    }
+    else{
+      result = await db
+        .select()
+        .from(transactionTable)
+        .where(
+          and(
+            eq(transactionTable.idUser, idUser),
+            eq(transactionTable.tipo, tipo),
+            gte(transactionTable.data, startTimestamp),
+            lte(transactionTable.data, endTimestamp),
+            eq(transactionTable.idCartao, idCard)
+          )
+        )
+        .orderBy(desc(transactionTable.id))
+        .execute();
+    }
     return result;
   } catch (error) {
     console.error('Erro na consulta:', error);
