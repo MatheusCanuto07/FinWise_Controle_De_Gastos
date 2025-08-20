@@ -21,7 +21,7 @@
 
 	let selectedPeriod = $state('lastWeek');
 	// svelte-ignore state_referenced_locally
-		let period = $state(selectedPeriod);
+	let period = $state(selectedPeriod);
 
 	let mudaUrl = () => {
 		filters.update({
@@ -40,7 +40,6 @@
 	}
 
   let selectCard = $state('todos')
-  $inspect(selectCard)
 </script>
 
 <div>
