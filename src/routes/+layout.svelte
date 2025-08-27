@@ -6,6 +6,5 @@
 
 <Nav />
 
-<div class="px-8">
-  {@render children()}
-</div>
+{@render children()}
+
