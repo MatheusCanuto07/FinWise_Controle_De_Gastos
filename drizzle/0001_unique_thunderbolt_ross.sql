@@ -27,6 +27,18 @@ CREATE TABLE `session` (
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
+CREATE TABLE `user` (
+	`id` text PRIMARY KEY NOT NULL,
+	`name` text NOT NULL,
+	`email` text NOT NULL,
+	`email_verified` integer DEFAULT false NOT NULL,
+	`image` text,
+	`created_at` integer DEFAULT (cast((julianday('now') - 2440587.5)*86400000 as integer)) NOT NULL,
+	`updated_at` integer DEFAULT (cast((julianday('now') - 2440587.5)*86400000 as integer)) NOT NULL,
+	`password` text NOT NULL,
+	`saldo` integer NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE `verification` (
 	`id` text PRIMARY KEY NOT NULL,
 	`identifier` text NOT NULL,
@@ -34,6 +46,38 @@ CREATE TABLE `verification` (
 	`expires_at` integer NOT NULL,
 	`created_at` integer DEFAULT (cast((julianday('now') - 2440587.5)*86400000 as integer)) NOT NULL,
 	`updated_at` integer DEFAULT (cast((julianday('now') - 2440587.5)*86400000 as integer)) NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE `cartao` (
+	`id` integer PRIMARY KEY NOT NULL,
+	`idUser` integer NOT NULL,
+	`nome` text NOT NULL,
+	`tipo` text NOT NULL,
+	`diaVencimento` integer NOT NULL,
+	`saldo` integer NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE `categoria` (
+	`id` integer PRIMARY KEY NOT NULL,
+	`idUser` integer NOT NULL,
+	`nome` text NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE `transaction` (
+	`id` integer PRIMARY KEY NOT NULL,
+	`descricao` text NOT NULL,
+	`idUser` integer NOT NULL,
+	`idCategoria` integer NOT NULL,
+	`idCartao` integer NOT NULL,
+	`valor` integer NOT NULL,
+	`data` integer NOT NULL,
+	`meio` text NOT NULL,
+	`tipo` text NOT NULL,
+	`recorrencia` text NOT NULL,
+	`tempoRecorrencia` text,
+	`tipoRecorrencia` text,
+	`diaRecorrencia` text,
+	`idOcorrencia` integer
 );
 --> statement-breakpoint
 CREATE TABLE `lembreteItem` (
@@ -45,22 +89,13 @@ CREATE TABLE `lembreteItem` (
 	`descricao` text NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE `lembrete` (
-	`id` integer,
+CREATE TABLE `lembretes` (
+	`id` integer PRIMARY KEY NOT NULL,
 	`idUser` integer NOT NULL,
-	`name` text NOT NULL,
+	`nome` text NOT NULL,
 	`pessoa` text NOT NULL,
-	`saldo` integer NOT NULL
+	`valor` integer NOT NULL
 );
 --> statement-breakpoint
-/*
- SQLite does not support "Changing existing column type" out of the box, we do not generate automatic migration for that, so it has to be done manually
- Please refer to: https://www.techonthenet.com/sqlite/tables/alter_table.php
-                  https://www.sqlite.org/lang_altertable.html
-                  https://stackoverflow.com/questions/2083543/modify-a-columns-type-in-sqlite3
-
- Due to that we don't generate migration automatically and it has to be done manually
-*/--> statement-breakpoint
-ALTER TABLE `cartao` ADD `saldo` integer NOT NULL;--> statement-breakpoint
-ALTER TABLE `transaction` ADD `descricao` text NOT NULL;--> statement-breakpoint
-CREATE UNIQUE INDEX `session_token_unique` ON `session` (`token`);
+CREATE UNIQUE INDEX `session_token_unique` ON `session` (`token`);--> statement-breakpoint
+CREATE UNIQUE INDEX `user_email_unique` ON `user` (`email`);

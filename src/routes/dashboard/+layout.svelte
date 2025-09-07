@@ -3,7 +3,6 @@
 	import type { PageData, LayoutData } from './$types';
 	import { page } from '$app/state';
 	import { filters } from './params.svelte';
-	import { invalidate } from '$app/navigation';
 
 	let pageActive = $state('transacoes');
 	function isActive(href: string) {
@@ -40,15 +39,7 @@
 	}
 
   let selectCard = $state('todos')
-  import { authClient } from "$lib/auth"; 
-  // retorna uma store (não o valor diretamente)
-  const session = authClient.useSession(); 
 </script>
-
-{
-  // acessa o valor atual da store de forma reativa
-  $session.data?.user.email
-}
 
 <div>
 	<div class="flex w-full justify-center gap-4">

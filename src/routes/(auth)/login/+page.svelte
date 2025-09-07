@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
 	import { authClient } from '$lib/auth-client';
 
@@ -16,6 +15,8 @@
         
       }
 	  );
+
+    errorMessage = error?.message ?? "";
   }
   let name = $state("");
   let isLoading = $state(false);

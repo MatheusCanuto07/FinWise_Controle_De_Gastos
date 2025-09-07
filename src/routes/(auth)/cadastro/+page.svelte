@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { PageData } from './$types';
   import { authClient } from "$lib/auth-client";
+	import { goto } from '$app/navigation';
   let email = $state("");
   let password = $state("");
   let name = $state("");
@@ -20,6 +21,7 @@
       },
       onSuccess: (ctx) => {
         //redirect to the dashboard or sign in page
+        goto('/dashboard');
       },
       onError: (ctx) => {
         // display the error message
@@ -47,7 +49,7 @@
         </div>
       {/if}
       
-      <form class="space-y-4" onsubmit={async (e) => { e.preventDefault(); await cadastro()} }>
+      <form class="space-y-4" onsubmit={async (e) => { await cadastro()} }>
         <div class="form-control">
           <label for="nome" class="label">
             <span class="label-text">Nome</span>

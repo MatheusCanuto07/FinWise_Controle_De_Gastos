@@ -1,1 +1,0 @@
-ALTER TABLE `cartao` ADD `nome` text NOT NULL;

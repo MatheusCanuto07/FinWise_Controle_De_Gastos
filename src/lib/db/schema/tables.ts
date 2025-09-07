@@ -23,14 +23,6 @@ export const transactionTable = sqliteTable('transaction', {
   idOcorrencia: integer('idOcorrencia'),
 });
 
-export const lembretesTable = sqliteTable('lembretes', {
-  id: integer('id').primaryKey().notNull(),
-  idUser : integer('idUser').notNull(),
-  nome : text('nome').notNull(),
-  pessoa : text('pessoa').notNull(),
-  valor : integer('valor').notNull(),
-})
-
 export const cartaoTable = sqliteTable('cartao', {
   id: integer('id').primaryKey().notNull(),
   idUser: integer('idUser').notNull(),
@@ -46,20 +38,12 @@ export const categoriaTable = sqliteTable('categoria', {
   nome: text('nome').notNull()
 });
 
-export const usuarioTable = sqliteTable('user', {
+export const lembretesTable = sqliteTable('lembretes', {
   id: integer('id').primaryKey().notNull(),
-  name: text('name').notNull(),
-  email: text('email').notNull(),
-  password: text('password').notNull(),
-  saldo: integer('saldo').notNull()
-});
-
-export const lembreteTable = sqliteTable('lembrete', {
-  id: integer('id'),
-  idUser: integer('idUser').notNull(),
-  nome: text('name').notNull(),
-  pessoa: text('pessoa').notNull(),
-  saldo: integer('saldo').notNull()
+  idUser : integer('idUser').notNull(),
+  nome : text('nome').notNull(),
+  pessoa : text('pessoa').notNull(),
+  valor : integer('valor').notNull(),
 })
 
 export const lembreteItem = sqliteTable('lembreteItem', {
@@ -82,9 +66,6 @@ export type CartaoInsert = typeof cartaoTable.$inferInsert;
 
 export type CategoriaSelect = typeof categoriaTable.$inferSelect;
 export type CategoriaInsert = typeof categoriaTable.$inferInsert;
-
-export type UsuarioSelect = typeof usuarioTable.$inferSelect;
-export type UsuarioInsert = typeof usuarioTable.$inferInsert;
 
 export type LembreteSelect = typeof lembretesTable.$inferSelect;
 export type LembreteInsert = typeof lembretesTable.$inferInsert;
