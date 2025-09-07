@@ -94,11 +94,6 @@ export async function selectTransactions(startDate: Date, endDate: Date, idUser 
       )
       .orderBy(desc(transactionTable.id))
       .execute();
-          lte(transactionTable.data, endTimestamp)
-        )
-      )
-      .orderBy(asc(transactionTable.id))
-      .execute();
     return result;
   } catch (error) {
     console.error('Erro na consulta:', error);
@@ -154,7 +149,6 @@ export async function selectTransactionsWithType(startDate: Date, endDate: Date,
   }
 }
 
-export async function deleteTransaction(idUser: number, id: number) {
 export async function deleteTransaction(id: number) {
   try {
     const deleted = await db
@@ -162,7 +156,7 @@ export async function deleteTransaction(id: number) {
       .where(
         and(
           eq(transactionTable.id, id),
-          eq(transactionTable.idUser, idUser)
+          eq(transactionTable.idUser, 1),
           eq(transactionTable.idOcorrencia, id)
         )
       )

@@ -7,6 +7,7 @@
 	// retorna uma store (não o valor diretamente)
 	const session = authClient.useSession();
 	let userName = $state($session.data?.user.name);
+  console.log(userName)
 </script>
 
 {#if !$session.data?.user.name}
