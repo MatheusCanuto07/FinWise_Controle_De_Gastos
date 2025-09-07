@@ -11,5 +11,9 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true, 
   }, 
+  trustedOrigins: [
+    "http://localhost:5173", 
+    ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : [])
+  ],
 });
 
