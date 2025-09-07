@@ -5,6 +5,8 @@
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
       <li><a href="/control">Control</a></li>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/cadastro">Cadastro</a></li>
       <!-- 
         <li>
           <details>

@@ -2,8 +2,15 @@ export {
   transactionTable,
   cartaoTable,
   categoriaTable,
-  usuarioTable
+  usuarioTable,
 } from './tables';
+
+export {
+  userTable,
+  accountTable,
+  sessionTable,
+  verificationTable,
+} from "./auth-schema"
 
 export type {
   TransactionSelect,

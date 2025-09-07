@@ -40,7 +40,15 @@
 	}
 
   let selectCard = $state('todos')
+  import { authClient } from "$lib/auth"; 
+  // retorna uma store (não o valor diretamente)
+  const session = authClient.useSession(); 
 </script>
+
+{
+  // acessa o valor atual da store de forma reativa
+  $session.data?.user.email
+}
 
 <div>
 	<div class="flex w-full justify-center gap-4">
