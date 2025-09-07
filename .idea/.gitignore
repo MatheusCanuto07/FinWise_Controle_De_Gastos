@@ -1,16 +1,12 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-# Rider ignored files
-<<<<<<< HEAD
 /modules.xml
 /projectSettingsUpdater.xml
 /.idea.FinWise_Controle_De_Gastos.iml
-=======
 /.idea.FinWise_Controle_De_Gastos.iml
 /projectSettingsUpdater.xml
 /modules.xml
->>>>>>> c671f74 (git ignore)
 /contentModel.xml
 # Editor-based HTTP Client requests
 /httpRequests/
