@@ -1,5 +1,5 @@
 <script lang="ts">
-  interface Props {
+	interface Props {
 		userName: string | undefined;
 	}
 
@@ -8,7 +8,7 @@
 
 <div class="navbar bg-base-300">
   <div class="flex-1">
-    <a class="btn btn-ghost text-xl" href="/dashboard">Controle de finanças</a>
+    <a class="btn btn-ghost text-xl" href="{userName ? "/dashboard" : "/"}">Controle de finanças</a>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">

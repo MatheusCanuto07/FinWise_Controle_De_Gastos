@@ -26,7 +26,7 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
+<div class="min-h-screen flex items-center justify-center p-4">
   <div class="card w-full max-w-md bg-base-100 shadow-xl">
     <div class="card-body">
       <h2 class="card-title text-3xl font-bold text-center mb-2">Login</h2>
@@ -41,7 +41,7 @@
         </div>
       {/if}
       
-      <form class="space-y-4" onsubmit={async () => await login()}>
+      <form class="space-y-4" onsubmit={async (e) =>  { e.preventDefault(); await login()}}>
         <div class="form-control">
           <label for="email" class="label">
             <span class="label-text">Email</span>
