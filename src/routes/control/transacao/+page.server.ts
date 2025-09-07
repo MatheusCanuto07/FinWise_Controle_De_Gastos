@@ -24,23 +24,31 @@ export const load = (async () => {
 
 export const actions = {
 	insert: async ({cookies, request}) => {
-		const dataForm = await request.formData();
+	const dataForm = await request.formData();
     const valor = dataForm.get('valor')?.toString() || ""
-		const data = dataForm.get('data')?.toString() || ""
+    const desc = dataForm.get('desc')?.toString() || "" 
+    const data = dataForm.get('data')?.toString() || ""
     const idCategoria = dataForm.get('idCategoria')?.toString() || ""
-    const idCartao = dataForm.get('idCartao')?.toString() || ""
-    const meio = dataForm.get('meio')?.toString() || ""
-    const tipo = (await getCartaoById(1, parseInt(idCartao)));
+    let idCartao = dataForm.get('idCartao')?.toString() || ""
+    const tipo = dataForm.get('tipo')?.toString() || ""
     const recorrencia = dataForm.get('recorrencia')?.toString() || ""
-
+    let meio = ""
+    if(idCartao == "0"){
+      meio = "Dinheiro"
+    }
+    else{
+      meio = "Cartao"
+    }
+      
     let transactionInsert : TransactionInsert ={
       idUser : 1,
+      desc : desc,
       valor : parseInt(valor ?? "0") * 100,
       data : dataParaTimestamp(new Date(data)),
       idCategoria : parseInt(idCategoria ?? "0"),
-      idCartao : parseInt(idCartao ?? "0"),
-      meio : meio,
-      tipo: tipo.tipo,
+      idCartao : idCartao == "dinheiro" ? 0 : parseInt(idCartao ?? "0"),
+      meio,
+      tipo: tipo,
       recorrencia : recorrencia
     }
 

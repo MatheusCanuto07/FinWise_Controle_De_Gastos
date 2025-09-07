@@ -1,14 +1,22 @@
 import type { PageServerLoad } from './$types';
-import { dataParaTimestamp } from '$lib/utils/functions';
+import { dataParaTimestamp, timestampParaData } from '$lib/utils/functions';
 import {selectTransactions} from "$lib/db/DAO/Transacao";
 
-export const load = (async () => {
+export const load = (async ({ depends }) => {
+  depends("transacoes");
   let date = new Date();
   let primeiroDia = new Date(Date.UTC(date.getFullYear(), date.getMonth(), 1));
   let ultimoDia = new Date(Date.UTC(date.getFullYear(), date.getMonth() + 1, 0));
+  let transacoes = await selectTransactions(primeiroDia, ultimoDia, 1);
   
-  let transactions = await selectTransactions(primeiroDia, ultimoDia, 1);
+  const transacoesWithDate = transacoes.map(t => {
+    return {
+      ...t,
+      dataConvertida: timestampParaData(t.data)
+    };
+  });
+  
   return {
-    transactions
+    transacoes
   };
 }) satisfies PageServerLoad;

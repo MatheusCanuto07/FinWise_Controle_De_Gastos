@@ -13,12 +13,10 @@
     })
   })
 
-  $inspect(selectedPeriod)
-
 </script>
 
 <select onchange={mudaUrl} class="select select-bordered w-full mt-2 mb-2" bind:value={selectedPeriod}>
   <option selected value="lastWeek">Última semana</option>
   <option value="lastMonth">Último mês</option>
   <option value="personalizadPeriod">Período personalizado</option>
-</select>	
+</select>

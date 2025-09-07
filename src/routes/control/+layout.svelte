@@ -17,20 +17,20 @@
 		class="tab"
 		class:tab-active={isActive('/control/transacao')}>Transacao</a>
 	<a
-	  href="/control/compraparcelada"
-	  role="tab"
-	  class="tab"
-	  class:tab-active={isActive('/control/compraparcelada')}>Compra Parcelada</a>
-	<a
 		href="/control/categoria"
 		role="tab"
 		class="tab"
 		class:tab-active={isActive('/control/categoria')}>Categoria</a>
     <a 
-      href="/control/cartao"
-      role="tab"
-      class="tab"
-      class:tab-active={isActive('/control/cartao')}>Cartão</a>
+        href="/control/cartao"
+        role="tab"
+        class="tab"
+        class:tab-active={isActive('/control/cartao')}>Cartão</a>
+	<a
+	    href="/control/lembrete"
+	    role="tab"
+	    class="tab"
+	    class:tab-active={isActive('/control/lembrete')}>Lembrete</a>
 </div>
 
 {@render children()}

@@ -89,12 +89,16 @@ export async function selectTransactions(startDate: Date, endDate: Date, idUser 
         and(
           eq(transactionTable.idUser, idUser),
           gte(transactionTable.data, startTimestamp),
+          lte(transactionTable.data, endTimestamp),
+        )
+      )
+      .orderBy(desc(transactionTable.id))
+      .execute();
           lte(transactionTable.data, endTimestamp)
         )
       )
       .orderBy(asc(transactionTable.id))
       .execute();
-    
     return result;
   } catch (error) {
     console.error('Erro na consulta:', error);
@@ -102,6 +106,55 @@ export async function selectTransactions(startDate: Date, endDate: Date, idUser 
   }
 }
 
+export async function selectTransactionsWithType(startDate: Date, endDate: Date, idUser : number, tipo : string, idCard : number = 0) {
+  try {
+    const startTimestamp = dataParaTimestamp(startDate);
+    const endTimestamp = dataParaTimestamp(endDate);
+
+    if (isNaN(startTimestamp) || isNaN(endTimestamp)) {
+      throw new Error('Datas INVÁLIDAS fornecidas');
+    }
+
+    let result;
+    if(idCard = 0){
+      result = await db
+        .select()
+        .from(transactionTable)
+        .where(
+          and(
+            eq(transactionTable.idUser, idUser),
+            eq(transactionTable.tipo, tipo),
+            gte(transactionTable.data, startTimestamp),
+            lte(transactionTable.data, endTimestamp),
+          )
+        )
+        .orderBy(desc(transactionTable.id))
+        .execute();
+    }
+    else{
+      result = await db
+        .select()
+        .from(transactionTable)
+        .where(
+          and(
+            eq(transactionTable.idUser, idUser),
+            eq(transactionTable.tipo, tipo),
+            gte(transactionTable.data, startTimestamp),
+            lte(transactionTable.data, endTimestamp),
+            eq(transactionTable.idCartao, idCard)
+          )
+        )
+        .orderBy(desc(transactionTable.id))
+        .execute();
+    }
+    return result;
+  } catch (error) {
+    console.error('Erro na consulta:', error);
+    throw new Error('Falha ao buscar transações');
+  }
+}
+
+export async function deleteTransaction(idUser: number, id: number) {
 export async function deleteTransaction(id: number) {
   try {
     const deleted = await db
@@ -109,13 +162,14 @@ export async function deleteTransaction(id: number) {
       .where(
         and(
           eq(transactionTable.id, id),
+          eq(transactionTable.idUser, idUser)
           eq(transactionTable.idOcorrencia, id)
         )
       )
       .returning({ deletedId: transactionTable.id });
 
     if (deleted.length === 0) {
-      console.warn(`Nenhuma transação encontrada com id e idOcorrencia: ${id}`);
+      console.warn(`Nenhuma transação encontrada com id: ${id}`);
       return false;
     }
 

@@ -1,7 +1,9 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-# Rider ignored files
+/modules.xml
+/projectSettingsUpdater.xml
+/.idea.FinWise_Controle_De_Gastos.iml
 /.idea.FinWise_Controle_De_Gastos.iml
 /projectSettingsUpdater.xml
 /modules.xml

@@ -2,6 +2,7 @@ import { integer, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
 export const transactionTable = sqliteTable('transaction', {
   id: integer('id').primaryKey().notNull(),
+  desc : text('descricao').notNull(),
   idUser: integer('idUser').notNull(),
   idCategoria: integer('idCategoria').notNull(),
   idCartao: integer('idCartao').notNull(),
@@ -22,20 +23,13 @@ export const transactionTable = sqliteTable('transaction', {
   idOcorrencia: integer('idOcorrencia'),
 });
 
-export const lembretesTable = sqliteTable('lembretes', {
-  id: integer('id').primaryKey().notNull(),
-  idUser : integer('idUser').notNull(),
-  nome : text('nome').notNull(),
-  pessoa : text('pessoa').notNull(),
-  valor : integer('valor').notNull(),
-})
-
 export const cartaoTable = sqliteTable('cartao', {
   id: integer('id').primaryKey().notNull(),
   idUser: integer('idUser').notNull(),
   nome: text('nome').notNull(),
   tipo: text('tipo').notNull(),
-  diaVencimento: integer('diaVencimento').notNull()
+  diaVencimento: integer('diaVencimento').notNull(),
+  saldo: integer('saldo').notNull()
 });
 
 export const categoriaTable = sqliteTable('categoria', {
@@ -44,13 +38,22 @@ export const categoriaTable = sqliteTable('categoria', {
   nome: text('nome').notNull()
 });
 
-export const usuarioTable = sqliteTable('user', {
+export const lembretesTable = sqliteTable('lembretes', {
   id: integer('id').primaryKey().notNull(),
-  name: text('name').notNull(),
-  email: text('email').notNull(),
-  password: text('password').notNull(),
-  saldo: integer('saldo').notNull()
-});
+  idUser : integer('idUser').notNull(),
+  nome : text('nome').notNull(),
+  pessoa : text('pessoa').notNull(),
+  valor : integer('valor').notNull(),
+})
+
+export const lembreteItem = sqliteTable('lembreteItem', {
+  id: integer('id'),
+  idUser: integer('idUser').notNull(),
+  idCategoria: integer('idCategoria').notNull(),
+  idLembrete : integer('idLembrete').notNull(),
+  valor: integer('valor').notNull(),
+  descricao : text('descricao').notNull(),
+})
 
 export type TransactionSelect = typeof transactionTable.$inferSelect;
 export type TransactionInsert = typeof transactionTable.$inferInsert;
@@ -63,9 +66,6 @@ export type CartaoInsert = typeof cartaoTable.$inferInsert;
 
 export type CategoriaSelect = typeof categoriaTable.$inferSelect;
 export type CategoriaInsert = typeof categoriaTable.$inferInsert;
-
-export type UsuarioSelect = typeof usuarioTable.$inferSelect;
-export type UsuarioInsert = typeof usuarioTable.$inferInsert;
 
 export type LembreteSelect = typeof lembretesTable.$inferSelect;
 export type LembreteInsert = typeof lembretesTable.$inferInsert;

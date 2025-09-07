@@ -1,4 +1,4 @@
-import { createLembrete } from '$lib/db/DAO/Lembrete';
+// import { createLembrete } from '$lib/db/DAO/Lembrete';
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
 
@@ -15,12 +15,12 @@ export const actions = {
     const valor = dataForm.get('valor')?.toString() || ""
 
     try{
-      const id = await createLembrete({
-        idUser : 1,
-        pessoa : pessoa,
-        nome : nome,
-        valor : parseInt(valor ?? "0")
-      });
+      // const id = await createLembrete({
+      //   idUser : 1,
+      //   pessoa : pessoa,
+      //   nome : nome,
+      //   valor : parseInt(valor ?? "0")
+      // });
       return {success: true}
     }
     catch(error){
