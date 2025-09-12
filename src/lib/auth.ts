@@ -15,5 +15,15 @@ export const auth = betterAuth({
     "http://localhost:5173", 
     ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : [])
   ],
+  session: {
+    cookieCache: {
+      expiresIn: 604800,
+		  updateAge: 86400,
+			enabled: true,
+			maxAge: 30000,
+      storeSessionInDatabase: true,
+		  preserveSessionInDatabase: false,
+		}
+  }
 });
 

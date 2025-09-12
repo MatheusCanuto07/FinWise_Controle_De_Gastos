@@ -1,17 +1,17 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import type { PageData, LayoutData } from './$types';
+	
 	import { page } from '$app/state';
 	import { filters } from './params.svelte';
+	import type { LayoutData } from './$types';
 
 	let pageActive = $state('transacoes');
 	function isActive(href: string) {
-		console.log(page.url.pathname, href);
 		return page.url.pathname.startsWith(href);
 	}
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
-	let { cartoesComSaldo } = data;
+	
 
 	filters.update({
 		period: 'lastWeek',
@@ -35,7 +35,6 @@
       period: selectedPeriod,
       cardId: id.toString(),
     });
-    
 	}
 
   let selectCard = $state('todos')
@@ -44,12 +43,12 @@
 <div>
 	<div class="flex w-full justify-center gap-4">
 		<div class="carousel rounded-box">
-			<div class="carousel-item">
+			<div class="carousel-item mt-3">
 				<button 
           onclick={() => {
             changeCard(0, 'todos');
           }} 
-          class={`${selectCard == 'todos' ? "border-4 border-indigo-600" : ""} card ml-3 bg-base-200 w-48`}>
+          class="card ml-3 bg-base-200 w-48">
 					<div class="card-body p-4">
 						<h3 class="font-semibold ">Todas as transações</h3>
 						<p class="text-3xl font-bold">
@@ -58,7 +57,7 @@
 					</div>
 				</button>
 			</div>
-			{#each cartoesComSaldo as c}
+			<!-- {#each cartoesComSaldo as c}
 				<div class="carousel-item">
 					<button onclick={() => { 
               changeCard(c.id, c.nome); 
@@ -72,7 +71,7 @@
 						</div>
 					</button>
 				</div>
-			{/each}
+			{/each} -->
 		</div>
 	</div>
 

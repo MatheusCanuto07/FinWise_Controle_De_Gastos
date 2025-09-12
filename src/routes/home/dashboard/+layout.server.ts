@@ -1,5 +1,3 @@
-import type { LayoutServerLoad } from './$types';
-
 import {
   selectTransactions, 
 } from "$lib/db/DAO/Transacao";
@@ -10,10 +8,11 @@ import {
 import { dataParaTimestamp } from '$lib/utils/functions';
 import type {CartaoSelect} from "$lib/db/schema/tables";
 import type { Transaction } from '@libsql/client';
+import type { LayoutServerLoad } from "../../$types";
 
-export const load = (async ({url, depends}) => {
+export const load = (async ({url, depends, locals }) => {
   depends('transacoes');
-  
+  console.log("Locals: " + locals.session);
   let cartoes = await getCartoes(1);
   let date = new Date();
   let primeiroDia = dataParaTimestamp(new Date(date.getFullYear(), date.getMonth(), 1));
@@ -30,6 +29,7 @@ export const load = (async ({url, depends}) => {
   // TODO: Lembrar de mandar as transações ordenadas por data se não vai dar bo no front
   return {
     // cartoes,
-    cartoesComSaldo
+    cartoesComSaldo, 
+    user : locals.user
   };
 }) satisfies LayoutServerLoad;
